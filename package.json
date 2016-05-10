@@ -1,0 +1,33 @@
+{
+  "name": "react-native-sketch",
+  "version": "0.1.0",
+  "description": "A <Sketch /> component for React-Native to draw with your fingers",
+  "main": "Sketch.ios.js",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-eslint": "^6.0.4",
+    "eslint": "^2.9.0",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.7.0",
+    "eslint-plugin-jsx-a11y": "^1.2.0",
+    "eslint-plugin-react": "^5.1.1",
+    "react": "^0.14.5",
+    "react-native": "^0.24.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com:jgrancher/react-native-sketch.git"
+  },
+  "keywords": [
+    "react",
+    "react",
+    "native",
+    "sketch",
+    "drawing"
+  ],
+  "author": "Jeremy Grancher (https://github.com/jgrancher)",
+  "license": "MIT"
+}

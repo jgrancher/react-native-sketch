@@ -1,0 +1,278 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D031206A1CD1FA5200897D5B /* RNSketch.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D03120691CD1FA5200897D5B /* RNSketch.h */; };
+		D031206C1CD1FA5200897D5B /* RNSketch.m in Sources */ = {isa = PBXBuildFile; fileRef = D031206B1CD1FA5200897D5B /* RNSketch.m */; };
+		D03120731CD1FF7300897D5B /* RNSketchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D03120721CD1FF7300897D5B /* RNSketchManager.m */; };
+		D0BDFA6D1CE1948600F20A1B /* RNSketchManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D0BDFA6C1CE191B500F20A1B /* RNSketchManager.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D03120641CD1FA5200897D5B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				D031206A1CD1FA5200897D5B /* RNSketch.h in CopyFiles */,
+				D0BDFA6D1CE1948600F20A1B /* RNSketchManager.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		D03120661CD1FA5200897D5B /* libRNSketch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNSketch.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D03120691CD1FA5200897D5B /* RNSketch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSketch.h; sourceTree = "<group>"; };
+		D031206B1CD1FA5200897D5B /* RNSketch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNSketch.m; sourceTree = "<group>"; };
+		D03120721CD1FF7300897D5B /* RNSketchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNSketchManager.m; sourceTree = "<group>"; };
+		D0BDFA6C1CE191B500F20A1B /* RNSketchManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNSketchManager.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D03120631CD1FA5200897D5B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D031205D1CD1FA5200897D5B = {
+			isa = PBXGroup;
+			children = (
+				D03120681CD1FA5200897D5B /* RNSketch */,
+				D03120671CD1FA5200897D5B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D03120671CD1FA5200897D5B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D03120661CD1FA5200897D5B /* libRNSketch.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D03120681CD1FA5200897D5B /* RNSketch */ = {
+			isa = PBXGroup;
+			children = (
+				D03120691CD1FA5200897D5B /* RNSketch.h */,
+				D031206B1CD1FA5200897D5B /* RNSketch.m */,
+				D0BDFA6C1CE191B500F20A1B /* RNSketchManager.h */,
+				D03120721CD1FF7300897D5B /* RNSketchManager.m */,
+			);
+			path = RNSketch;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D03120651CD1FA5200897D5B /* RNSketch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D031206F1CD1FA5200897D5B /* Build configuration list for PBXNativeTarget "RNSketch" */;
+			buildPhases = (
+				D03120621CD1FA5200897D5B /* Sources */,
+				D03120631CD1FA5200897D5B /* Frameworks */,
+				D03120641CD1FA5200897D5B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RNSketch;
+			productName = RNSketch;
+			productReference = D03120661CD1FA5200897D5B /* libRNSketch.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D031205E1CD1FA5200897D5B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Jeremy Grancher";
+				TargetAttributes = {
+					D03120651CD1FA5200897D5B = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = D03120611CD1FA5200897D5B /* Build configuration list for PBXProject "RNSketch" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D031205D1CD1FA5200897D5B;
+			productRefGroup = D03120671CD1FA5200897D5B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D03120651CD1FA5200897D5B /* RNSketch */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D03120621CD1FA5200897D5B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D031206C1CD1FA5200897D5B /* RNSketch.m in Sources */,
+				D03120731CD1FF7300897D5B /* RNSketchManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D031206D1CD1FA5200897D5B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		D031206E1CD1FA5200897D5B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D03120701CD1FA5200897D5B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../React/**",
+					"$(SRCROOT)/../react-native/React/**",
+					"$(SRCROOT)/node_modules/react-native/React/**",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		D03120711CD1FA5200897D5B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../React/**",
+					"$(SRCROOT)/../react-native/React/**",
+					"$(SRCROOT)/node_modules/react-native/React/**",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D03120611CD1FA5200897D5B /* Build configuration list for PBXProject "RNSketch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D031206D1CD1FA5200897D5B /* Debug */,
+				D031206E1CD1FA5200897D5B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D031206F1CD1FA5200897D5B /* Build configuration list for PBXNativeTarget "RNSketch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D03120701CD1FA5200897D5B /* Debug */,
+				D03120711CD1FA5200897D5B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D031205E1CD1FA5200897D5B /* Project object */;
+}
