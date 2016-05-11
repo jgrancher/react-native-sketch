@@ -1,7 +1,7 @@
 {
   "name": "react-native-sketch",
   "version": "0.1.0",
-  "description": "A <Sketch /> component for React-Native to draw with your fingers",
+  "description": "A react-native &lt;Sketch /&gt; component to draw with touch events",
   "main": "Sketch.ios.js",
   "dependencies": {},
   "devDependencies": {
@@ -19,14 +19,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "github.com:jgrancher/react-native-sketch.git"
+    "url": "https://github.com/jgrancher/react-native-sketch.git"
   },
   "keywords": [
     "react",
-    "react",
-    "native",
+    "react-native",
     "sketch",
-    "drawing"
+    "draw",
+    "drawing",
+    "touch",
+    "paint",
+    "canvas",
+    "signature"
   ],
   "author": "Jeremy Grancher (https://github.com/jgrancher)",
   "license": "MIT"
