@@ -1,7 +1,7 @@
 {
   "name": "react-native-sketch",
   "version": "0.2.0",
-  "description": "A react-native &lt;Sketch /&gt; component to draw with touch events",
+  "description": "A react-native component to draw with touch events",
   "main": "index.ios.js",
   "dependencies": {},
   "devDependencies": {

@@ -1,6 +1,6 @@
 # react-native-sketch
 
-A react-native &lt;Sketch /&gt; component to draw with touch events. (*Only for iOS for now*)
+A react-native component to draw with touch events. (*Only for iOS for now*)
 
 ![Screenshots](https://cloud.githubusercontent.com/assets/5517450/15202227/ca865758-183b-11e6-8c4e-41080bc04538.jpg "Disclaimer: This is not my signature ;)")
 
