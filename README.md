@@ -116,7 +116,7 @@ export default Signature;
 
 ## Roadmap
 
-- [ ] Make the clearing of the drawing from outside the component possible (ie. Send an action from a button)
+- [ ] Define a way for external components to clear the current drawing. (ie. Trigger an action from a button).
 - [ ] Improve the documentation
 - [ ] Make some tests!
 - [ ] Android support (help wanted ¯\\_(ツ)_/¯)
