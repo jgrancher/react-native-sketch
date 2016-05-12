@@ -9,6 +9,7 @@
 #import "RNSketchManager.h"
 #import "RNSketch.h"
 #import "RCTBridge.h"
+#import "RCTConvert.h"
 #import "RCTEventDispatcher.h"
 
 #define ERROR_IMAGE_INVALID @"ERROR_IMAGE_INVALID"
@@ -22,8 +23,14 @@ RCT_EXPORT_MODULE()
 #pragma mark - Properties
 
 
-RCT_EXPORT_VIEW_PROPERTY(fillColor, NSString)
-RCT_EXPORT_VIEW_PROPERTY(strokeColor, NSString)
+RCT_CUSTOM_VIEW_PROPERTY(fillColor, UIColor, RNSketch)
+{
+  [view setFillColor:json ? [RCTConvert UIColor:json] : [UIColor whiteColor]];
+}
+RCT_CUSTOM_VIEW_PROPERTY(strokeColor, UIColor, RNSketch)
+{
+  [view setStrokeColor:json ? [RCTConvert UIColor:json] : [UIColor blackColor]];
+}
 RCT_EXPORT_VIEW_PROPERTY(strokeThickness, NSInteger)
 
 

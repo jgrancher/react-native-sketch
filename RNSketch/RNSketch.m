@@ -10,7 +10,6 @@
 #import "RNSketchManager.h"
 #import "RCTEventDispatcher.h"
 #import "RCTView.h"
-#import "UIColor+Hexadecimal.h"
 #import "UIView+React.h"
 
 @implementation RNSketch
@@ -206,14 +205,14 @@
 #pragma mark - Setters
 
 
-- (void)setFillColor:(NSString *)fillColor
+- (void)setFillColor:(UIColor *)fillColor
 {
-  _fillColor = [UIColor colorWithHexString:fillColor];
+  _fillColor = fillColor;
 }
 
-- (void)setStrokeColor:(NSString *)strokeColor
+- (void)setStrokeColor:(UIColor *)strokeColor
 {
-  _strokeColor = [UIColor colorWithHexString:strokeColor];
+  _strokeColor = strokeColor;
 }
 
 - (void)setStrokeThickness:(NSInteger)strokeThickness

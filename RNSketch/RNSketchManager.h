@@ -10,8 +10,8 @@
 
 @interface RNSketchManager : RCTViewManager
 
-@property (nonatomic, strong) NSString *fillColor;
-@property (nonatomic, strong) NSString *strokeColor;
+@property (nonatomic, strong) UIColor *fillColor;
+@property (nonatomic, strong) UIColor *strokeColor;
 @property (nonatomic, assign) NSInteger strokeThickness;
 
 @end;
