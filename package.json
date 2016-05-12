@@ -2,7 +2,7 @@
   "name": "react-native-sketch",
   "version": "0.1.0",
   "description": "A react-native &lt;Sketch /&gt; component to draw with touch events",
-  "main": "Sketch.ios.js",
+  "main": "index.ios.js",
   "dependencies": {},
   "devDependencies": {
     "babel-eslint": "^6.0.4",
