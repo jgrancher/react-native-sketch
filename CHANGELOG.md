@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v0.2.2] - 2016-05-13
+### Changed
+- Updated package.json with new keywords
+
+## [v0.2.1] - 2016-05-12
+### Changed
+- Fix: Replaced a custom UIColor category with RCTConvert (To prevent linking issues...)
+
 ## [v0.2.0] - 2016-05-12
 ### Changed
 - The sketch frame is not static anymore (height is 200px by default)
