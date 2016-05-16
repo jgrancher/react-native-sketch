@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v0.2.3] - 2016-05-16
+### Changed
+- Corrected `onReset` callback: Call `onUpdate` with a null value, then the onReset property.
+
 ## [v0.2.2] - 2016-05-13
 ### Changed
 - Updated package.json with new keywords

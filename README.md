@@ -57,6 +57,7 @@ class Signature extends Component {
 
   constructor(props) {
     super(props);
+    this.onReset = this.onReset.bind(this);
     this.onSave = this.onSave.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
   }
@@ -66,12 +67,19 @@ class Signature extends Component {
   };
 
   /**
+   * Do extra things after the sketch reset
+   */
+  onReset() {
+    console.log('The drawing has been cleared!');
+  }
+
+  /**
    * The Sketch component provides a 'saveImage' function (promise),
    * so that you can save the drawing in the device and get an object
    * once the promise is resolved, containing the path of the image.
    */
   onSave() {
-    this._sketch.saveImage(this.state.encodedSignature)
+    this.sketch.saveImage(this.state.encodedSignature)
       .then((data) => console.log(data))
       .catch((error) => console.log(error));
   }
@@ -94,12 +102,13 @@ class Signature extends Component {
           fillColor="#f5f5f5"
           strokeColor="#111111"
           strokeThickness={2}
-          onReset={this.onUpdate}
+          onReset={this.onReset}
           onUpdate={this.onUpdate}
-          ref={(sketch) => { this._sketch = sketch; }}
+          ref={(sketch) => { this.sketch = sketch; }}
           style={styles.sketch}
         />
         <TouchableOpacity
+          disabled={!this.state.encodedSignature}
           style={styles.button}
           onPress={this.onSave}
         >

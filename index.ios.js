@@ -41,7 +41,13 @@ export default class Sketch extends Component {
 
   constructor(props) {
     super(props);
+    this.onReset = this.onReset.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
+  }
+
+  onReset() {
+    this.props.onUpdate(null);
+    this.props.onReset();
   }
 
   onUpdate(e) {
@@ -62,6 +68,7 @@ export default class Sketch extends Component {
       <RNSketch
         {...this.props}
         onChange={this.onUpdate}
+        onReset={this.onReset}
         style={[styles.base, this.props.style]}
       />
     );
