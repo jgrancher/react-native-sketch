@@ -15,6 +15,7 @@
     "react-native": "^0.24.1"
   },
   "scripts": {
+    "postversion": "git push && git push --tags",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
