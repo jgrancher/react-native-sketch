@@ -1,5 +1,7 @@
 # react-native-sketch
 
+[![Join the chat at https://gitter.im/jgrancher/react-native-sketch](https://badges.gitter.im/jgrancher/react-native-sketch.svg)](https://gitter.im/jgrancher/react-native-sketch?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 A react-native component to draw with touch events. (*Only for iOS for now*)
 
 ![Screenshots](https://cloud.githubusercontent.com/assets/5517450/15202227/ca865758-183b-11e6-8c4e-41080bc04538.jpg "Disclaimer: This is not my signature ;)")
