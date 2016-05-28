@@ -1,16 +1,13 @@
 # react-native-sketch
 
-[![Join the chat at https://gitter.im/jgrancher/react-native-sketch](https://badges.gitter.im/jgrancher/react-native-sketch.svg)](https://gitter.im/jgrancher/react-native-sketch?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Version](https://img.shields.io/npm/v/react-native-sketch.svg?style=flat-square)](http://npm.im/react-native-sketch)
+[![Downloads](https://img.shields.io/npm/dm/react-native-sketch.svg?style=flat-square)](http://npm.im/react-native-sketch)
+[![Gitter](https://img.shields.io/badge/chat-on%20gitter-1dce73.svg?style=flat-square)](https://gitter.im/jgrancher/react-native-sketch)
+[![MIT License](https://img.shields.io/npm/l/react-native-sketch.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 
-A react-native component to draw with touch events. (*Only for iOS for now*)
+*A react-native component for touch-based drawing.*
 
 ![Screenshots](https://cloud.githubusercontent.com/assets/5517450/15202227/ca865758-183b-11e6-8c4e-41080bc04538.jpg "Disclaimer: This is not my signature ;)")
-
-## Why?
-
-For a work project, I needed a react-native component that would allow a user to draw their signature with their fingers, then save it as an image and upload it.
-
-As I could not find anything pre-existing ready to use (I tried some experiments with the unmaintained [react-native-canvas](https://github.com/lwansbrough/react-native-canvas) but I encountered performances issues), I developed this component, which shamelessly uses this [smooth drawing technique](http://code.tutsplus.com/tutorials/smooth-freehand-drawing-on-ios--mobile-13164) under the hood.
 
 ## Getting started
 
@@ -19,7 +16,7 @@ Install [rnpm](https://github.com/rnpm/rnpm) to make things easy:
 $ npm i -g rnpm
 ```
 
-Then, with rnpm installed:
+Then, use rnpm to [install and link](https://github.com/rnpm/rnpm#running) this component to your project:
 ```bash
 $ rnpm install react-native-sketch
 ```
@@ -127,7 +124,19 @@ export default Signature;
 
 ## Roadmap
 
-- [ ] Define a way for external components to clear the current drawing. (ie. Trigger an action from a button).
-- [ ] Improve the documentation
-- [ ] Make some tests!
-- [ ] Android support (help wanted ¯\\_(ツ)_/¯)
+- [ ] Define a way for an external component to clear the current drawing.
+- [ ] Improve the documentation.
+- [ ] Make some tests.
+- [ ] Android support (help wanted ¯\\_(ツ)_/¯).
+
+## Notes
+
+This component uses this [smooth freehand drawing technique](http://code.tutsplus.com/tutorials/smooth-freehand-drawing-on-ios--mobile-13164) under the hood.
+
+## Contributing
+
+Feel free to contribute by sending a pull request or [creating an issue](https://github.com/jgrancher/react-native-sketch/issues/new).
+
+## License
+
+MIT
