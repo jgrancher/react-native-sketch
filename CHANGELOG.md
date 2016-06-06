@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v0.2.4] - 2016-06-06
+### Changed
+- Corrected `PropTypes` import in index.ios.js - Removed from 'react-native' package...
+
 ## [v0.2.3] - 2016-05-16
 ### Changed
 - Corrected `onReset` callback: Call `onUpdate` with a null value, then the onReset property.
