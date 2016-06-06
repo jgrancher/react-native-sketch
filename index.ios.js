@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   NativeModules,
-  PropTypes,
   requireNativeComponent,
   StyleSheet,
   View,
 } from 'react-native';
 
-const { func, number, string } = PropTypes;
+const { func, number, string } = React.PropTypes;
 
 const SketchManager = NativeModules.RNSketchManager || {};
 const BASE_64_CODE = 'data:image/jpg;base64,';
@@ -19,7 +18,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class Sketch extends Component {
+export default class Sketch extends React.Component {
 
   static propTypes = {
     fillColor: string,
