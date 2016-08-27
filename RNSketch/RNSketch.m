@@ -215,6 +215,16 @@
   _strokeColor = strokeColor;
 }
 
+- (void)setInitialImage:(NSString *)initialImagePath
+{
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSString *documentsPath = [paths objectAtIndex:0]; //Get the docs directory
+  NSString *filePath = [documentsPath stringByAppendingPathComponent:@"image.png"]; //Add the file name
+//  NSData *pngData = [NSData dataWithContentsOfFile:filePath];
+  NSData *pngData = [NSData dataWithContentsOfFile:initialImagePath];
+  _image = [UIImage imageWithData:pngData];
+}
+
 - (void)setStrokeThickness:(NSInteger)strokeThickness
 {
   _path.lineWidth = strokeThickness;
