@@ -21,10 +21,13 @@
   UIImage *_image;
   CGPoint _points[5];
   uint _counter;
+    CGSize _size;
 
   // Configuration settings
   UIColor *_fillColor;
   UIColor *_strokeColor;
+  UIImage *_initialImage;
+    UIImage *_originalImage;
 }
 
 
@@ -41,6 +44,7 @@
 
     // TODO: Find a way to get an functionnal external 'clear button'
     [self initClearButton];
+      _size = self.bounds.size;
   }
 
   return self;
@@ -110,9 +114,9 @@
 
   // Send event
   NSDictionary *bodyEvent = @{
-                              @"target": self.reactTag,
-                              @"image": [self drawingToString],
-                              };
+    @"target": self.reactTag,
+    @"image": [self drawingToString],
+  };
   [_eventDispatcher sendInputEventWithName:@"topChange" body:bodyEvent];
 }
 
@@ -155,9 +159,21 @@
 - (void)drawBitmap
 {
   UIGraphicsBeginImageContextWithOptions(self.bounds.size, YES, 0);
-
   // If first time, paint background
   if (!_image) {
+      CGSize size = self.bounds.size;
+
+      //    CGSize size=CGSizeMake(200, 500);//set the width and height
+      //    CGSize size = self.bounds.size;
+      UIGraphicsBeginImageContext(size);
+      [_originalImage drawInRect:CGRectMake(0,0,size.width,size.height)];
+      _initialImage = UIGraphicsGetImageFromCurrentImageContext();
+      //here is the scaled image which has been changed to the size specified
+      UIGraphicsEndImageContext();
+
+      //  _initialImage = [UIImage imageWithData:pngData];
+      _image = _initialImage;
+
     [_fillColor setFill];
     [[UIBezierPath bezierPathWithRect:self.bounds] fill];
   }
@@ -189,15 +205,15 @@
   // Disabling to clear
   [_clearButton setEnabled:false];
 
-  _image = nil;
+  _image = _initialImage;
 
   [self drawBitmap];
   [self setNeedsDisplay];
 
   // Send event
   NSDictionary *bodyEvent = @{
-                              @"target": self.reactTag,
-                              };
+    @"target": self.reactTag,
+  };
   [_eventDispatcher sendInputEventWithName:@"onReset" body:bodyEvent];
 }
 
@@ -220,9 +236,8 @@
   NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
   NSString *documentsPath = [paths objectAtIndex:0]; //Get the docs directory
   NSString *filePath = [documentsPath stringByAppendingPathComponent:@"image.png"]; //Add the file name
-//  NSData *pngData = [NSData dataWithContentsOfFile:filePath];
   NSData *pngData = [NSData dataWithContentsOfFile:initialImagePath];
-  _image = [UIImage imageWithData:pngData];
+  _originalImage = [UIImage imageWithData:pngData];
 }
 
 - (void)setStrokeThickness:(NSInteger)strokeThickness
