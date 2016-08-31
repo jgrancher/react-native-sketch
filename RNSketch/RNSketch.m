@@ -159,8 +159,10 @@
   UIGraphicsBeginImageContextWithOptions(self.bounds.size, YES, 0);
   // If first time, set image or paint background
   if (!_image) {
-    [_initialImage drawInRect:CGRectMake(0,0,self.bounds.size.width,self.bounds.size.height)];
-    _image = UIGraphicsGetImageFromCurrentImageContext();
+    if (_initialImage) {
+      [_initialImage drawInRect:CGRectMake(0,0,self.bounds.size.width,self.bounds.size.height)];
+      _image = UIGraphicsGetImageFromCurrentImageContext();
+    }
     [_fillColor setFill];
     [[UIBezierPath bezierPathWithRect:self.bounds] fill];
   }
