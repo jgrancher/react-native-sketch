@@ -27,7 +27,7 @@ export default class Sketch extends React.Component {
     strokeColor: string,
     strokeThickness: number,
     style: View.propTypes.style,
-    initialImagePath: string,
+    imageFilePath: string,
   };
 
   static defaultProps = {
@@ -37,7 +37,7 @@ export default class Sketch extends React.Component {
     strokeColor: '#000000',
     strokeThickness: 1,
     style: null,
-    initialImagePath: null,
+    imageFilePath: null,
   };
 
   constructor(props) {

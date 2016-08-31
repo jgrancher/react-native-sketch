@@ -220,9 +220,9 @@
   _strokeColor = strokeColor;
 }
 
-- (void)setInitialImage:(NSString *)initialImagePath
+- (void)setImageFromFile:(NSString *)pathToFile
 {
-  NSData *pngData = [NSData dataWithContentsOfFile:initialImagePath];
+  NSData *pngData = [NSData dataWithContentsOfFile:pathToFile];
   _initialImage = [UIImage imageWithData:pngData];
 }
 

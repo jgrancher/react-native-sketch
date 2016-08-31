@@ -12,7 +12,7 @@
 
 @property (nonatomic, strong) UIColor *fillColor;
 @property (nonatomic, strong) UIColor *strokeColor;
-@property (nonatomic, strong) NSString *initialImagePath;
+@property (nonatomic, strong) NSString *imageFilePath;
 @property (nonatomic, assign) NSInteger strokeThickness;
 
 @end;

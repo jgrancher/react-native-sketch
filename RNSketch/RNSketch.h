@@ -15,6 +15,6 @@
 - (instancetype)initWithEventDispatcher:(RCTEventDispatcher *)eventDispather NS_DESIGNATED_INITIALIZER;
 - (void)setFillColor:(UIColor *)fillColor;
 - (void)setStrokeColor:(UIColor *)strokeColor;
-- (void)setInitialImage:(NSString *)initialImagePath;
+- (void)setImageFromFile:(NSString *)pathToFile;
 
 @end

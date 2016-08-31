@@ -31,9 +31,9 @@ RCT_CUSTOM_VIEW_PROPERTY(strokeColor, UIColor, RNSketch)
 {
   [view setStrokeColor:json ? [RCTConvert UIColor:json] : [UIColor blackColor]];
 }
-RCT_CUSTOM_VIEW_PROPERTY(initialImagePath, NSString, RNSketch)
+RCT_CUSTOM_VIEW_PROPERTY(imageFilePath, NSString, RNSketch)
 {
-  [view setInitialImage:json ? [RCTConvert NSString:json] : nil];
+  [view setImageFromFile:json ? [RCTConvert NSString:json] : nil];
 }
 RCT_EXPORT_VIEW_PROPERTY(strokeThickness, NSInteger)
 
