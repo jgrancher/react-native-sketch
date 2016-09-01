@@ -25,6 +25,7 @@
   // Configuration settings
   UIColor *_fillColor;
   UIColor *_strokeColor;
+  UIImage *_initialImage;
 }
 
 
@@ -110,9 +111,9 @@
 
   // Send event
   NSDictionary *bodyEvent = @{
-                              @"target": self.reactTag,
-                              @"image": [self drawingToString],
-                              };
+    @"target": self.reactTag,
+    @"image": [self drawingToString],
+  };
   [_eventDispatcher sendInputEventWithName:@"topChange" body:bodyEvent];
 }
 
@@ -155,9 +156,12 @@
 - (void)drawBitmap
 {
   UIGraphicsBeginImageContextWithOptions(self.bounds.size, YES, 0);
-
-  // If first time, paint background
+  // If first time, set image or paint background
   if (!_image) {
+    if (_initialImage) {
+      [_initialImage drawInRect:CGRectMake(0,0,self.bounds.size.width,self.bounds.size.height)];
+      _image = UIGraphicsGetImageFromCurrentImageContext();
+    }
     [_fillColor setFill];
     [[UIBezierPath bezierPathWithRect:self.bounds] fill];
   }
@@ -196,8 +200,8 @@
 
   // Send event
   NSDictionary *bodyEvent = @{
-                              @"target": self.reactTag,
-                              };
+    @"target": self.reactTag,
+  };
   [_eventDispatcher sendInputEventWithName:@"onReset" body:bodyEvent];
 }
 
@@ -213,6 +217,12 @@
 - (void)setStrokeColor:(UIColor *)strokeColor
 {
   _strokeColor = strokeColor;
+}
+
+- (void)setImageFromFile:(NSString *)pathToFile
+{
+  NSData *pngData = [NSData dataWithContentsOfFile:pathToFile];
+  _initialImage = [UIImage imageWithData:pngData];
 }
 
 - (void)setStrokeThickness:(NSInteger)strokeThickness

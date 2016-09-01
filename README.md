@@ -99,6 +99,7 @@ class Signature extends Component {
         </Text>
         <Sketch
           fillColor="#f5f5f5"
+          imageFilePath={path.to.file}
           strokeColor="#111111"
           strokeThickness={2}
           onReset={this.onReset}
