@@ -26,7 +26,6 @@
   UIColor *_fillColor;
   UIColor *_strokeColor;
   UIImage *_initialImage;
-  UIImage *_originalImage;
 }
 
 
