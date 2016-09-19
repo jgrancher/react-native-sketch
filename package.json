@@ -12,7 +12,7 @@
     "eslint-plugin-jsx-a11y": "^1.2.0",
     "eslint-plugin-react": "^5.1.1",
     "react": "^0.14.5",
-    "react-native": "^0.24.1"
+    "react-native": "^0.33.0"
   },
   "scripts": {
     "postversion": "git push && git push --tags",
