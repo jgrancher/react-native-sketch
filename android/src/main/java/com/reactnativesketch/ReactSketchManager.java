@@ -10,7 +10,7 @@ public class ReactSketchManager extends SimpleViewManager<SketchView> {
     private ThemedReactContext mContext = null;
     @Override
     public String getName() {
-        return "Sketch";
+        return "RNSketch";
     }
 
 

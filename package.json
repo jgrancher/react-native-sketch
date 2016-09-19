@@ -1,8 +1,8 @@
 {
   "name": "react-native-sketch",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "A react-native component for touch-based drawing",
-  "main": "index.ios.js",
+  "main": "index.js",
   "dependencies": {},
   "devDependencies": {
     "babel-eslint": "^6.0.4",
