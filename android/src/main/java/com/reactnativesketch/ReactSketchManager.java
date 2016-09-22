@@ -7,16 +7,17 @@ import com.facebook.react.uimanager.ThemedReactContext;
  * Created by asoto on 18/09/16.
  */
 public class ReactSketchManager extends SimpleViewManager<SketchView> {
-    private ThemedReactContext mContext = null;
-    @Override
-    public String getName() {
-        return "RNSketch";
-    }
+  private ThemedReactContext mContext = null;
+
+  @Override
+  public String getName() {
+    return "RNSketch";
+  }
 
 
-    @Override
-    protected SketchView createViewInstance(ThemedReactContext reactContext) {
-        mContext = reactContext;
-        return new SketchView(mContext);
-    }
+  @Override
+  protected SketchView createViewInstance(ThemedReactContext reactContext) {
+    mContext = reactContext;
+    return new SketchView(mContext);
+  }
 }

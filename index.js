@@ -26,7 +26,7 @@ export default class Sketch extends React.Component {
     onUpdate: func,
     strokeColor: string,
     strokeThickness: number,
-    style: View.propTypes.style,
+    ...View.propTypes
   };
 
   static defaultProps = {
@@ -54,12 +54,16 @@ export default class Sketch extends React.Component {
   }
 
   saveImage(image) {
+    if (!image) {
+      return SketchManager.saveImage();
+    }
     if (typeof image !== 'string') {
       return Promise.reject('You need to provide a valid base64 encoded image.');
     }
 
     const src = image.indexOf(BASE_64_CODE) === 0 ? image.replace(BASE_64_CODE, '') : image;
     return SketchManager.saveImage(src);
+
   }
 
   render() {
