@@ -1,17 +1,24 @@
 package com.reactnativesketch;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Base64;
 import android.util.Log;
 
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
+import com.facebook.react.bridge.Promise;
+import com.facebook.react.bridge.PromiseImpl;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.WritableMap;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -30,6 +37,7 @@ public class SketchViewModule extends ReactContextBaseJavaModule {
     this.mReactContext = reactContext;
   }
 
+
   @Override
   public String getName() {
     return "RNSketch";
@@ -41,7 +49,7 @@ public class SketchViewModule extends ReactContextBaseJavaModule {
    * @return an empty file
    */
   private File createNewFile() {
-    String filename = "image-" + UUID.randomUUID().toString() + ".jpg";
+    String filename = "image-" + UUID.randomUUID().toString() + ".png";
     File path;
     path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
     File f = new File(path, filename);
@@ -56,23 +64,25 @@ public class SketchViewModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void saveImage(final Callback callback) {
+  public void saveImage(String image64, Promise promise) {
     Log.d("Fuck my", "life");
-    /*if(permissionsCheck()) {
+    if(permissionsCheck()) {
       File outputFile = createNewFile();
       OutputStream fout = null;
       try {
         fout = new FileOutputStream(outputFile);
-        //getBitmap().compress(Bitmap.CompressFormat.JPEG, 100, fout);
+        fout.write(Base64.decode(image64, Base64.NO_WRAP));
         fout.flush();
         fout.close();
-        callback.invoke(outputFile.getAbsolutePath());
+        WritableMap map = Arguments.createMap();
+        map.putString("uri", outputFile.getAbsolutePath());
+        Log.d("Saving Image", outputFile.getAbsolutePath());
+        promise.resolve(map);
       } catch (IOException e) {
-        callback.invoke(null);
+        promise.reject(e);
         e.printStackTrace();
       }
-    }*/
-    callback.invoke("Hello world");
+    }
   }
 
   private boolean permissionsCheck() {
@@ -81,6 +91,8 @@ public class SketchViewModule extends ReactContextBaseJavaModule {
       String[] PERMISSIONS = {
           Manifest.permission.WRITE_EXTERNAL_STORAGE,
       };
+      String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+      ActivityCompat.requestPermissions(getCurrentActivity(), permissions,1);
       return false;
 
     }
