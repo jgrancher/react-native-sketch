@@ -31,8 +31,11 @@ RCT_CUSTOM_VIEW_PROPERTY(strokeColor, UIColor, RNSketch)
 {
   [view setStrokeColor:json ? [RCTConvert UIColor:json] : [UIColor blackColor]];
 }
+RCT_CUSTOM_VIEW_PROPERTY(clearButtonHidden, BOOL, RNSketch)
+{
+  [view setClearButtonHidden:json ? [RCTConvert BOOL:json] : NO];
+}
 RCT_EXPORT_VIEW_PROPERTY(strokeThickness, NSInteger)
-
 
 #pragma mark - Lifecycle
 
