@@ -52,6 +52,11 @@
   [self drawBitmap];
 }
 
+- (void)setClearButtonHidden:(BOOL)hidden
+{
+  _clearButton.hidden = hidden;
+}
+
 
 #pragma mark - Subviews
 
