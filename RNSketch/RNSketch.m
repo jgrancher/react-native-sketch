@@ -36,6 +36,8 @@
   if ((self = [super init])) {
     // Internal setup
     self.multipleTouchEnabled = NO;
+    // For borderRadius property to work (CALayer's cornerRadius).
+    self.layer.masksToBounds = YES;
     _eventDispatcher = eventDispatcher;
     _path = [UIBezierPath bezierPath];
 
