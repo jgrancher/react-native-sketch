@@ -19,7 +19,6 @@
 
 RCT_EXPORT_MODULE()
 
-
 #pragma mark - Properties
 
 
@@ -39,12 +38,23 @@ RCT_EXPORT_VIEW_PROPERTY(strokeThickness, NSInteger)
 
 #pragma mark - Lifecycle
 
+- (instancetype)init
+{
+  if ((self = [super init])) {
+    self.sketchView = nil;
+  }
+  
+  return self;
+}
 
 - (UIView *)view
 {
-  return [[RNSketch alloc] initWithEventDispatcher:self.bridge.eventDispatcher];
+  if (!self.sketchView) {
+    self.sketchView = [[RNSketch alloc] initWithEventDispatcher:self.bridge.eventDispatcher];
+  }
+  
+  return self.sketchView;
 }
-
 
 #pragma mark - Event types
 
@@ -82,6 +92,13 @@ RCT_EXPORT_METHOD(saveImage:(NSString *)encodedImage
     return reject(ERROR_FILE_CREATION, @"An error occured. Impossible to save the file.", nil);
   }
   resolve(@{@"path": fullPath});
+}
+
+RCT_EXPORT_METHOD(clear)
+{
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [self.sketchView clearDrawing];
+  });
 }
 
 @end

@@ -64,6 +64,10 @@ export default class Sketch extends React.Component {
     return SketchManager.saveImage(src);
   }
 
+  clear() {
+    return SketchManager.clear();
+  }
+
   render() {
     return (
       <RNSketch
