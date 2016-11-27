@@ -33,6 +33,10 @@ RCT_CUSTOM_VIEW_PROPERTY(strokeColor, UIColor, RNSketch)
 }
 RCT_EXPORT_VIEW_PROPERTY(strokeThickness, NSInteger)
 
+RCT_CUSTOM_VIEW_PROPERTY(imageType, NSString, RNSketch)
+{
+  [view setImageType:json ? [RCTConvert NSString:json] : @"jpeg"];
+}
 
 #pragma mark - Lifecycle
 

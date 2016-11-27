@@ -6,10 +6,9 @@ import {
   View,
 } from 'react-native';
 
-const { func, number, string } = React.PropTypes;
+const { func, number, string, oneOf } = React.PropTypes;
 
 const SketchManager = NativeModules.RNSketchManager || {};
-const BASE_64_CODE = 'data:image/jpg;base64,';
 
 const styles = StyleSheet.create({
   base: {
@@ -27,6 +26,7 @@ export default class Sketch extends React.Component {
     strokeColor: string,
     strokeThickness: number,
     style: View.propTypes.style,
+    imageType: oneOf(['jpg', 'png'])
   };
 
   static defaultProps = {
@@ -36,12 +36,14 @@ export default class Sketch extends React.Component {
     strokeColor: '#000000',
     strokeThickness: 1,
     style: null,
+    imageType: 'jpg'
   };
 
   constructor(props) {
     super(props);
     this.onReset = this.onReset.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
+    this.getBase64Code = this.getBase64Code.bind(this);
   }
 
   onReset() {
@@ -49,8 +51,14 @@ export default class Sketch extends React.Component {
     this.props.onReset();
   }
 
+  getBase64Code() {
+    return `data:image/${this.props.imageType};base64,`;
+  }
+
   onUpdate(e) {
-    this.props.onUpdate(`${BASE_64_CODE}${e.nativeEvent.image}`);
+    const { onUpdate, imageType } = this.props;
+
+    onUpdate(`${this.getBase64Code()}${e.nativeEvent.image}`);
   }
 
   saveImage(image) {
@@ -58,7 +66,8 @@ export default class Sketch extends React.Component {
       return Promise.reject('You need to provide a valid base64 encoded image.');
     }
 
-    const src = image.indexOf(BASE_64_CODE) === 0 ? image.replace(BASE_64_CODE, '') : image;
+    const base64Code = this.getBase64Code();
+    const src = image.indexOf(base64Code) === 0 ? image.replace(base64Code, '') : image;
     return SketchManager.saveImage(src);
   }
 
