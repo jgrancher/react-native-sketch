@@ -62,6 +62,7 @@ RCT_CUSTOM_VIEW_PROPERTY(imageType, NSString, RNSketch)
 
 
 RCT_EXPORT_METHOD(saveImage:(NSString *)encodedImage
+                  ofType:(NSString *)imageType
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 {
@@ -75,7 +76,7 @@ RCT_EXPORT_METHOD(saveImage:(NSString *)encodedImage
   NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
   NSString *documentsDirectory = [paths firstObject];
   NSFileManager *fileManager = [NSFileManager defaultManager];
-  NSString *fullPath = [[documentsDirectory stringByAppendingPathComponent:[[NSUUID UUID] UUIDString]] stringByAppendingPathExtension:@"jpg"];
+  NSString *fullPath = [[documentsDirectory stringByAppendingPathComponent:[[NSUUID UUID] UUIDString]] stringByAppendingPathExtension:imageType];
 
   // Save image and return the path
   BOOL fileCreated = [fileManager createFileAtPath:fullPath contents:imageData attributes:nil];

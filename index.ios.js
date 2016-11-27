@@ -68,7 +68,7 @@ export default class Sketch extends React.Component {
 
     const base64Code = this.getBase64Code();
     const src = image.indexOf(base64Code) === 0 ? image.replace(base64Code, '') : image;
-    return SketchManager.saveImage(src);
+    return SketchManager.saveImage(src, this.props.imageType);
   }
 
   render() {
