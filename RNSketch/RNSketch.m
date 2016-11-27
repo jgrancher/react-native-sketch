@@ -86,6 +86,11 @@
   _counter = 0;
   UITouch *touch = [touches anyObject];
   _points[0] = [touch locationInView:self];
+  
+  NSDictionary *bodyEvent = @{
+                              @"target": self.reactTag,
+                              };
+  [_eventDispatcher sendInputEventWithName:@"onClearPlaceholder" body:bodyEvent];
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

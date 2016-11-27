@@ -50,6 +50,7 @@ RCT_EXPORT_VIEW_PROPERTY(strokeThickness, NSInteger)
 {
   return @[
            @"onReset",
+           @"onClearPlaceholder"
            ];
 }
 
