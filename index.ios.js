@@ -24,6 +24,7 @@ export default class Sketch extends React.Component {
     fillColor: string,
     onReset: func,
     onUpdate: func,
+    onClearPlaceholder: func,
     strokeColor: string,
     strokeThickness: number,
     style: View.propTypes.style,
@@ -32,6 +33,7 @@ export default class Sketch extends React.Component {
   static defaultProps = {
     fillColor: '#ffffff',
     onReset: () => {},
+    onClearPlaceholder: () => {},
     onUpdate: () => {},
     strokeColor: '#000000',
     strokeThickness: 1,
@@ -41,12 +43,17 @@ export default class Sketch extends React.Component {
   constructor(props) {
     super(props);
     this.onReset = this.onReset.bind(this);
+    this.onClearPlaceholder = this.onClearPlaceholder.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
   }
 
   onReset() {
     this.props.onUpdate(null);
     this.props.onReset();
+  }
+
+  onClearPlaceholder() {
+    this.props.onClearPlaceholder();
   }
 
   onUpdate(e) {
@@ -68,6 +75,7 @@ export default class Sketch extends React.Component {
         {...this.props}
         onChange={this.onUpdate}
         onReset={this.onReset}
+        onClearPlaceholder={this.onClearPlaceholder}
         style={[styles.base, this.props.style]}
       />
     );
