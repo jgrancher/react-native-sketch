@@ -8,7 +8,7 @@ import {
 
 const { func, number, string } = React.PropTypes;
 
-const SketchManager = NativeModules.RNSketchManager || {};
+const SketchManager = NativeModules.RNSketch || {};
 const BASE_64_CODE = 'data:image/jpg;base64,';
 
 const styles = StyleSheet.create({
@@ -26,7 +26,7 @@ export default class Sketch extends React.Component {
     onUpdate: func,
     strokeColor: string,
     strokeThickness: number,
-    style: View.propTypes.style,
+    ...View.propTypes
   };
 
   static defaultProps = {
