@@ -6,11 +6,11 @@
 //  Copyright © 2016 Jeremy Grancher. All rights reserved.
 //
 
+#import <React/RCTEventDispatcher.h>
+#import <React/RCTView.h>
+#import <React/UIView+React.h>
 #import "RNSketch.h"
 #import "RNSketchManager.h"
-#import "RCTEventDispatcher.h"
-#import "RCTView.h"
-#import "UIView+React.h"
 
 @implementation RNSketch
 {
