@@ -1,61 +1,53 @@
-# react-native-sketch
+# React Native Sketch
 
 [![Version](https://img.shields.io/npm/v/react-native-sketch.svg?style=flat-square)](http://npm.im/react-native-sketch)
 [![Downloads](https://img.shields.io/npm/dm/react-native-sketch.svg?style=flat-square)](http://npm.im/react-native-sketch)
 [![Gitter](https://img.shields.io/badge/chat-on%20gitter-1dce73.svg?style=flat-square)](https://gitter.im/jgrancher/react-native-sketch)
 [![MIT License](https://img.shields.io/npm/l/react-native-sketch.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 
-*A react-native component for touch-based drawing.*
+*A React Native component for touch-based drawing.*
 
 ![Screenshots](https://cloud.githubusercontent.com/assets/5517450/15202227/ca865758-183b-11e6-8c4e-41080bc04538.jpg "Disclaimer: This is not my signature ;)")
 
 ## Getting started
 
-Install [rnpm](https://github.com/rnpm/rnpm) to make things easy:
+Install React Native Sketch:
 ```bash
-$ npm i -g rnpm
+$ npm install react-native-sketch
 ```
 
-Then, use rnpm to [install and link](https://github.com/rnpm/rnpm#running) this component to your project:
+Then, link it to your project:
 ```bash
-$ rnpm install react-native-sketch
+$ react-native link
 ```
+
+**Note**: If you are using an older version of React Native than `0.31`, you will need to install [rnpm](https://github.com/rnpm/rnpm) to link the module.
 
 ## Usage
 
 ```javascript
-import React, { Component } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React from 'react';
+import {
+  Button,
+  StyleSheet,
+  View,
+} from 'react-native';
 import Sketch from 'react-native-sketch';
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
-  },
-  instructions: {
-    fontSize: 16,
-    marginBottom: 20,
-    textAlign: 'center',
+    flex: 1,
   },
   sketch: {
     height: 250, // Height needed; Default: 200px
-    marginBottom: 20,
-  },
-  button: {
-    alignItems: 'center',
-    backgroundColor: '#111111',
-    padding: 20,
-  },
-  buttonText: {
-    color: '#ffffff',
-    fontSize: 16,
   },
 });
 
-class Signature extends Component {
+class Signature extends React.Component {
 
   constructor(props) {
     super(props);
+    this.clear = this.clear.bind(this);
     this.onReset = this.onReset.bind(this);
     this.onSave = this.onSave.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
@@ -64,6 +56,13 @@ class Signature extends Component {
   state = {
     encodedSignature: null,
   };
+
+  /**
+   * Clear / reset the drawing
+   */
+  clear() {
+    this.sketch.clear();
+  }
 
   /**
    * Do extra things after the sketch reset
@@ -94,9 +93,6 @@ class Signature extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.instructions}>
-          Use your finger on the screen to sign.
-        </Text>
         <Sketch
           fillColor="#f5f5f5"
           strokeColor="#111111"
@@ -106,13 +102,15 @@ class Signature extends Component {
           ref={(sketch) => { this.sketch = sketch; }}
           style={styles.sketch}
         />
-        <TouchableOpacity
+        <Button
+          onPress={this.clear}
+          title="Clear drawing"
+        />
+        <Button
           disabled={!this.state.encodedSignature}
-          style={styles.button}
           onPress={this.onSave}
-        >
-          <Text style={styles.buttonText}>Save</Text>
-        </TouchableOpacity>
+          title="Save drawing"
+        />
       </View>
     );
   }
@@ -122,16 +120,10 @@ class Signature extends Component {
 export default Signature;
 ```
 
-## Roadmap
-
-- [ ] Define a way for an external component to clear the current drawing.
-- [ ] Improve the documentation.
-- [ ] Make some tests.
-- [ ] Android support (help wanted ¯\\_(ツ)_/¯).
-
 ## Notes
 
-This component uses this [smooth freehand drawing technique](http://code.tutsplus.com/tutorials/smooth-freehand-drawing-on-ios--mobile-13164) under the hood.
+- The module is available *only on iOS* (for now), as I don't know Android development... But if you think you can help on that matter, please feel free to contact me!
+- The module uses this [smooth freehand drawing technique](http://code.tutsplus.com/tutorials/smooth-freehand-drawing-on-ios--mobile-13164) under the hood.
 
 ## Contributing
 
@@ -139,4 +131,4 @@ Feel free to contribute by sending a pull request or [creating an issue](https:/
 
 ## License
 
-MIT
+[MIT](https://github.com/jgrancher/react-native-sketch/tree/master/LICENSE)
