@@ -6,11 +6,11 @@
 //  Copyright © 2016 Jeremy Grancher. All rights reserved.
 //
 
+#import <React/RCTEventDispatcher.h>
+#import <React/RCTView.h>
+#import <React/UIView+React.h>
 #import "RNSketch.h"
 #import "RNSketchManager.h"
-#import "RCTEventDispatcher.h"
-#import "RCTView.h"
-#import "UIView+React.h"
 
 @implementation RNSketch
 {
@@ -160,7 +160,7 @@
 
 - (void)drawBitmap
 {
-  UIGraphicsBeginImageContextWithOptions(self.bounds.size, YES, 0);
+  UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0);
 
   // If first time, paint background
   if (!_image) {
@@ -183,7 +183,7 @@
 
 - (NSString *)drawingToString
 {
-  return [UIImageJPEGRepresentation(_image, 1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+  return [UIImagePNGRepresentation(_image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
 }
 
 
