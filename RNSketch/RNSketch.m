@@ -160,7 +160,7 @@
 
 - (void)drawBitmap
 {
-  UIGraphicsBeginImageContextWithOptions(self.bounds.size, YES, 0);
+  UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0);
 
   // If first time, paint background
   if (!_image) {
@@ -183,7 +183,7 @@
 
 - (NSString *)drawingToString
 {
-  return [UIImageJPEGRepresentation(_image, 1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+  return [UIImagePNGRepresentation(_image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
 }
 
 
