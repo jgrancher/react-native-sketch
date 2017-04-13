@@ -36,6 +36,7 @@ RCT_EXPORT_VIEW_PROPERTY(fillColor, UIColor);
 RCT_EXPORT_VIEW_PROPERTY(imageType, NSString);
 RCT_EXPORT_VIEW_PROPERTY(strokeColor, UIColor);
 RCT_EXPORT_VIEW_PROPERTY(strokeThickness, NSInteger);
+RCT_EXPORT_VIEW_PROPERTY(imageURL, NSURL);
 
 #pragma mark - Lifecycle
 
@@ -54,6 +55,7 @@ RCT_EXPORT_VIEW_PROPERTY(strokeThickness, NSInteger);
     self.sketchView = [[RNSketch alloc] initWithFrame:CGRectZero];
   }
 
+<<<<<<< HEAD
   return self.sketchView;
 }
 
@@ -61,6 +63,11 @@ RCT_EXPORT_VIEW_PROPERTY(strokeThickness, NSInteger);
 
 RCT_EXPORT_METHOD(saveDrawing:(NSString *)encodedImage
                   ofType:(NSString *)imageType
+=======
+#pragma mark - Exported methods
+
+RCT_EXPORT_METHOD(saveImage:(NSString *)encodedImage
+>>>>>>> 4b1b0e6... Added image property that can be used by React Native to force an update to the native view
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 {

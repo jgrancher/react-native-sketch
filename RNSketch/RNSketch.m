@@ -183,6 +183,14 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
   _strokeColor = strokeColor;
 }
 
+- (void)setImageURL:(NSURL *)imageURL
+{
+  NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+  _image = [UIImage imageWithData:imageData];
+  [self drawBitmap];
+  [self setNeedsDisplay];
+}
+
 - (void)setStrokeThickness:(NSInteger)strokeThickness
 {
   _path.lineWidth = strokeThickness;
