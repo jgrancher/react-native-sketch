@@ -28,7 +28,11 @@ RCT_CUSTOM_VIEW_PROPERTY(fillColor, UIColor, RNSketch)
 }
 RCT_CUSTOM_VIEW_PROPERTY(strokeColor, UIColor, RNSketch)
 {
-  [view setStrokeColor:json ? [RCTConvert UIColor:json] : [UIColor blackColor]];
+  [view setStrokeColor:json ? [RCTConvert UIColor:json] : [UIColor clearColor]];
+}
+RCT_CUSTOM_VIEW_PROPERTY(image, NSURL, RNSketch)
+{
+    [view setImage:json ?[RCTConvert NSURL:json] : nil];
 }
 RCT_CUSTOM_VIEW_PROPERTY(clearButtonHidden, BOOL, RNSketch)
 {
@@ -66,9 +70,7 @@ RCT_EXPORT_VIEW_PROPERTY(strokeThickness, NSInteger)
            ];
 }
 
-
 #pragma mark - Exported methods
-
 
 RCT_EXPORT_METHOD(saveImage:(NSString *)encodedImage
                   resolve:(RCTPromiseResolveBlock)resolve

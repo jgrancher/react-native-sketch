@@ -27,6 +27,7 @@ export default class Sketch extends React.Component {
     clearButtonHidden: bool,
     strokeColor: string,
     strokeThickness: number,
+    image: string,
     style: View.propTypes.style,
   };
 
@@ -37,13 +38,16 @@ export default class Sketch extends React.Component {
     clearButtonHidden: false,
     strokeColor: '#000000',
     strokeThickness: 1,
-    style: null,
+    image: null,
+    style: null
   };
 
   constructor(props) {
     super(props);
     this.onReset = this.onReset.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
+
+    this.state = {}
   }
 
   onReset() {
@@ -68,10 +72,22 @@ export default class Sketch extends React.Component {
     return SketchManager.clear();
   }
 
+  setImage(image) {
+    if (this.state.image == image) {
+      this.setState({
+          image: null
+      })
+    }
+    this.setState({
+        image
+    })
+  }
+
   render() {
     return (
       <RNSketch
         {...this.props}
+        image={this.state.image}
         onChange={this.onUpdate}
         onReset={this.onReset}
         style={[styles.base, this.props.style]}
