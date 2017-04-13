@@ -77,7 +77,6 @@
   [self addSubview:_clearButton];
 }
 
-
 #pragma mark - UIResponder methods
 
 
@@ -154,7 +153,7 @@
 
 - (void)drawBitmap
 {
-  UIGraphicsBeginImageContextWithOptions(self.bounds.size, YES, 0);
+  UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, UIViewContentModeScaleAspectFit);
 
   // If first time, paint background
   if (!_image) {
@@ -177,7 +176,7 @@
 
 - (NSString *)drawingToString
 {
-  return [UIImageJPEGRepresentation(_image, 1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+  return [UIImagePNGRepresentation(_image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
 }
 
 
@@ -213,6 +212,14 @@
 - (void)setStrokeColor:(UIColor *)strokeColor
 {
   _strokeColor = strokeColor;
+}
+
+- (void)setImage:(NSURL *)image
+{
+  NSData *imageData = [NSData dataWithContentsOfURL:image];
+  _image = [UIImage imageWithData:imageData];
+  [self drawBitmap];
+  [self setNeedsDisplay];
 }
 
 - (void)setStrokeThickness:(NSInteger)strokeThickness
