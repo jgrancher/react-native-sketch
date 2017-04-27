@@ -97,6 +97,7 @@ class Signature extends React.Component {
           fillColor="#f5f5f5"
           strokeColor="#111111"
           strokeThickness={2}
+          imageType="png"
           onReset={this.onReset}
           onUpdate={this.onUpdate}
           ref={(sketch) => { this.sketch = sketch; }}
