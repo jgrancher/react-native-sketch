@@ -94,7 +94,7 @@ class Signature extends React.Component {
     return (
       <View style={styles.container}>
         <Sketch
-          fillColor="#f5f5f5"
+          fillColor="transparent"
           strokeColor="#111111"
           strokeThickness={2}
           imageType="png"
