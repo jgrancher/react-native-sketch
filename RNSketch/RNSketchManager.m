@@ -6,11 +6,11 @@
 //  Copyright © 2016 Jeremy Grancher. All rights reserved.
 //
 
-#import "RNSketchManager.h"
+#import <React/RCTEventDispatcher.h>
+#import <React/RCTView.h>
+#import <React/UIView+React.h>
 #import "RNSketch.h"
-#import "RCTBridge.h"
-#import "RCTConvert.h"
-#import "RCTEventDispatcher.h"
+#import "RNSketchManager.h"
 
 #define ERROR_IMAGE_INVALID @"ERROR_IMAGE_INVALID"
 #define ERROR_FILE_CREATION @"ERROR_FILE_CREATION"
