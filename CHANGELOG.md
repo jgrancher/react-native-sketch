@@ -2,16 +2,20 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v0.5.0] - 2017-04-28
+### Changed
+- Supports of `fillColor="transparent"` attribute value. Requires `imageType="png"` to export a transparent image (Thanks [@aprihodko](https://github.com/aprihodko) [@vccabral](https://github.com/vccabral)!).
+
 ## [v0.4.0] - 2017-04-27
 ### Added
-- Added `imageType` attribute to choose the image type to export: 'png' or 'jpg' (Thanks @blargity!).
+- Added `imageType` attribute to choose the image type to export: 'png' or 'jpg' (Thanks [@blargity](https://github.com/blargity)!).
 
 ## [v0.3.0] - 2017-01-19
 ### Added
-- Added `clear` method to reset the drawing from outside (Thanks @blargity!).
+- Added `clear` method to reset the drawing from outside (Thanks [@blargity](https://github.com/blargity)!).
 
 ### Changed
-- Fix to make borderRadius property on the sketch view working (Thanks @blargity!).
+- Fix to make borderRadius property on the sketch view working (Thanks [@blargity](https://github.com/blargity)!).
 
 ## [v0.2.4] - 2016-06-06
 ### Changed
