@@ -36,6 +36,11 @@ RCT_CUSTOM_VIEW_PROPERTY(clearButtonHidden, BOOL, RNSketch)
 }
 RCT_EXPORT_VIEW_PROPERTY(strokeThickness, NSInteger)
 
+RCT_CUSTOM_VIEW_PROPERTY(imageType, NSString, RNSketch)
+{
+  [view setImageType:json ? [RCTConvert NSString:json] : @"jpg"];
+}
+
 #pragma mark - Lifecycle
 
 - (instancetype)init
@@ -43,7 +48,7 @@ RCT_EXPORT_VIEW_PROPERTY(strokeThickness, NSInteger)
   if ((self = [super init])) {
     self.sketchView = nil;
   }
-  
+
   return self;
 }
 
@@ -52,7 +57,7 @@ RCT_EXPORT_VIEW_PROPERTY(strokeThickness, NSInteger)
   if (!self.sketchView) {
     self.sketchView = [[RNSketch alloc] initWithEventDispatcher:self.bridge.eventDispatcher];
   }
-  
+
   return self.sketchView;
 }
 
@@ -71,6 +76,7 @@ RCT_EXPORT_VIEW_PROPERTY(strokeThickness, NSInteger)
 
 
 RCT_EXPORT_METHOD(saveImage:(NSString *)encodedImage
+                  ofType:(NSString *)imageType
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 {
@@ -84,7 +90,7 @@ RCT_EXPORT_METHOD(saveImage:(NSString *)encodedImage
   NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
   NSString *documentsDirectory = [paths firstObject];
   NSFileManager *fileManager = [NSFileManager defaultManager];
-  NSString *fullPath = [[documentsDirectory stringByAppendingPathComponent:[[NSUUID UUID] UUIDString]] stringByAppendingPathExtension:@"jpg"];
+  NSString *fullPath = [[documentsDirectory stringByAppendingPathComponent:[[NSUUID UUID] UUIDString]] stringByAppendingPathExtension:imageType];
 
   // Save image and return the path
   BOOL fileCreated = [fileManager createFileAtPath:fullPath contents:imageData attributes:nil];

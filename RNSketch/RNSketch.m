@@ -25,6 +25,7 @@
   // Configuration settings
   UIColor *_fillColor;
   UIColor *_strokeColor;
+  NSString *_imageType;
 }
 
 
@@ -183,7 +184,15 @@
 
 - (NSString *)drawingToString
 {
-  return [UIImageJPEGRepresentation(_image, 1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+  if ([_imageType isEqualToString:@"jpg"]) {
+    return [UIImageJPEGRepresentation(_image, 1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+  } else if ([_imageType isEqualToString:@"png"]) {
+    return [UIImagePNGRepresentation(_image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+  }
+  
+  [NSException raise:@"Invalid image type" format:@"%@ is not a valid image type for exporting the drawing.", _imageType];
+  
+  return nil;
 }
 
 
@@ -224,6 +233,11 @@
 - (void)setStrokeThickness:(NSInteger)strokeThickness
 {
   _path.lineWidth = strokeThickness;
+}
+
+- (void)setImageType:(NSString *)imageType
+{
+  _imageType = imageType;
 }
 
 @end
