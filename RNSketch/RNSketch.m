@@ -161,10 +161,10 @@
 
 - (void)drawBitmap
 {
-  UIGraphicsBeginImageContextWithOptions(self.bounds.size, YES, 0);
+  UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0);
 
   // If first time, paint background
-  if (!_image) {
+  if (!_image && _fillColor) {
     [_fillColor setFill];
     [[UIBezierPath bezierPathWithRect:self.bounds] fill];
   }
@@ -189,9 +189,9 @@
   } else if ([_imageType isEqualToString:@"png"]) {
     return [UIImagePNGRepresentation(_image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
   }
-  
+
   [NSException raise:@"Invalid image type" format:@"%@ is not a valid image type for exporting the drawing.", _imageType];
-  
+
   return nil;
 }
 

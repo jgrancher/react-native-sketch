@@ -2,20 +2,12 @@ import React from 'react';
 import {
   NativeModules,
   requireNativeComponent,
-  StyleSheet,
   View,
 } from 'react-native';
 
 const { func, number, string, bool, oneOf } = React.PropTypes;
 
 const SketchManager = NativeModules.RNSketchManager || {};
-
-const styles = StyleSheet.create({
-  base: {
-    flex: 1,
-    height: 200,
-  },
-});
 
 export default class Sketch extends React.Component {
 
@@ -81,7 +73,10 @@ export default class Sketch extends React.Component {
         {...this.props}
         onChange={this.onUpdate}
         onReset={this.onReset}
-        style={[styles.base, this.props.style]}
+        style={[{
+          flex: 1,
+          backgroundColor: this.props.fillColor,
+        }, this.props.style]}
       />
     );
   }
