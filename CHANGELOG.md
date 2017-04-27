@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v0.4.0] - 2017-04-27
+### Added
+- Added `imageType` attribute to choose the image type to export: 'png' or 'jpg' (Thanks @blargity!).
+
 ## [v0.3.0] - 2017-01-19
 ### Added
 - Added `clear` method to reset the drawing from outside (Thanks @blargity!).
