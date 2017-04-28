@@ -15,5 +15,8 @@
 - (instancetype)initWithEventDispatcher:(RCTEventDispatcher *)eventDispather NS_DESIGNATED_INITIALIZER;
 - (void)setFillColor:(UIColor *)fillColor;
 - (void)setStrokeColor:(UIColor *)strokeColor;
+- (void)setClearButtonHidden:(BOOL)hidden;
+- (void)clearDrawing;
+- (void)setImage:(NSURL *)image;
 
 @end

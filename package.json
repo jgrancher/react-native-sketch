@@ -1,6 +1,6 @@
 {
   "name": "react-native-sketch",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "description": "A react-native component for touch-based drawing",
   "main": "index.ios.js",
   "dependencies": {},
@@ -15,7 +15,7 @@
     "react-native": "^0.24.1"
   },
   "scripts": {
-    "postversion": "git push && git push --tags",
+    "postversion": "git push --follow-tags",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
