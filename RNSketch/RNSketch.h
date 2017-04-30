@@ -7,16 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@class RCTEventDispatcher;
+#import <React/UIView+React.h>
 
 @interface RNSketch : UIView
 
-- (instancetype)initWithEventDispatcher:(RCTEventDispatcher *)eventDispather NS_DESIGNATED_INITIALIZER;
-- (void)setFillColor:(UIColor *)fillColor;
-- (void)setStrokeColor:(UIColor *)strokeColor;
-- (void)setClearButtonHidden:(BOOL)hidden;
-- (void)clearDrawing;
-- (void)setImageType:(NSString *)imageType;
+- (void)clear;
+- (NSString *)base64Code;
+
+// Events
+@property (nonatomic, copy) RCTBubblingEventBlock onChange;
+@property (nonatomic, copy) RCTBubblingEventBlock onClear;
+
+// Properties
+@property (nonatomic, strong) UIColor *color;
+@property (nonatomic, strong) NSString *imageType;
+@property (nonatomic, assign) NSInteger thickness;
 
 @end

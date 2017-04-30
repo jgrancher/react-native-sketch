@@ -6,7 +6,7 @@
 //  Copyright © 2016 Jeremy Grancher. All rights reserved.
 //
 
-#import "RCTViewManager.h"
+#import <React/RCTViewManager.h>
 #import "RNSketch.h"
 
 @interface RNSketchManager : RCTViewManager
