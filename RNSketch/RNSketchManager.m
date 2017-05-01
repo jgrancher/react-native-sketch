@@ -25,9 +25,10 @@ RCT_EXPORT_VIEW_PROPERTY(onClear, RCTBubblingEventBlock);
 
 #pragma mark - Properties
 
-RCT_EXPORT_VIEW_PROPERTY(color, UIColor);
+RCT_EXPORT_VIEW_PROPERTY(fillColor, UIColor);
 RCT_EXPORT_VIEW_PROPERTY(imageType, NSString);
-RCT_EXPORT_VIEW_PROPERTY(thickness, NSInteger);
+RCT_EXPORT_VIEW_PROPERTY(strokeColor, UIColor);
+RCT_EXPORT_VIEW_PROPERTY(strokeThickness, NSInteger);
 
 #pragma mark - Lifecycle
 
@@ -51,7 +52,7 @@ RCT_EXPORT_VIEW_PROPERTY(thickness, NSInteger);
 
 #pragma mark - Exported methods
 
-RCT_EXPORT_METHOD(saveImage:(NSString *)encodedImage
+RCT_EXPORT_METHOD(saveDrawing:(NSString *)encodedImage
                   ofType:(NSString *)imageType
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
@@ -84,7 +85,7 @@ RCT_EXPORT_METHOD(saveImage:(NSString *)encodedImage
   resolve(@{ @"path": fullPath });
 }
 
-RCT_EXPORT_METHOD(clear:(RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(clearDrawing:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 {
   dispatch_async(dispatch_get_main_queue(), ^{

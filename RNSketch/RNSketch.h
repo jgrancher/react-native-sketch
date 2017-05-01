@@ -19,8 +19,9 @@
 @property (nonatomic, copy) RCTBubblingEventBlock onClear;
 
 // Properties
-@property (nonatomic, strong) UIColor *color;
+@property (nonatomic, strong) UIColor *fillColor;
 @property (nonatomic, strong) NSString *imageType;
-@property (nonatomic, assign) NSInteger thickness;
+@property (nonatomic, strong) UIColor *strokeColor;
+@property (nonatomic, assign) NSInteger strokeThickness;
 
 @end

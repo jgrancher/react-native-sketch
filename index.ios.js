@@ -6,23 +6,33 @@ const SketchManager = NativeModules.RNSketchManager || {};
 export default class Sketch extends React.Component {
 
   static propTypes = {
-    backgroundColor: React.PropTypes.string,
-    color: React.PropTypes.string,
+    fillColor: React.PropTypes.string,
     imageType: React.PropTypes.oneOf(['jpg', 'png']),
     onChange: React.PropTypes.func,
     onClear: React.PropTypes.func,
+    strokeColor: React.PropTypes.string,
+    strokeThickness: React.PropTypes.number,
     style: View.propTypes.style,
-    thickness: React.PropTypes.number,
   }
 
   static defaultProps = {
-    backgroundColor: 'rgba(0, 0, 0, 0)',
-    color: '#000000',
+    fillColor: null,
     imageType: 'png',
     onChange: () => {},
     onClear: () => {},
+    strokeColor: '#000000',
+    strokeThickness: 1,
     style: null,
-    thickness: 1,
+  }
+
+  constructor(props) {
+    super(props);
+
+    // Sketch base style properties
+    this.style = {
+      flex: 1,
+      backgroundColor: 'transparent',
+    };
   }
 
   state = {
@@ -41,24 +51,17 @@ export default class Sketch extends React.Component {
     this.props.onClear();
   }
 
-  clear = () => SketchManager.clear()
+  clear = () => SketchManager.clearDrawing()
 
-  save = () => SketchManager.saveImage(this.state.imageData, this.props.imageType)
+  save = () => SketchManager.saveDrawing(this.state.imageData, this.props.imageType)
 
   render() {
-    const baseStyle = {
-      flex: 1,
-      backgroundColor: this.props.backgroundColor,
-    };
-
     return (
       <RNSketch
-        color={this.props.color}
-        imageType={this.props.imageType}
+        {...this.props}
         onChange={this.onChange}
         onClear={this.onClear}
-        style={[baseStyle, this.props.style]}
-        thickness={this.props.thickness}
+        style={[this.style, this.props.style]}
       />
     );
   }

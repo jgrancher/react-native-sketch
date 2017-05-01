@@ -85,7 +85,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 - (void)drawRect:(CGRect)rect
 {
   [_image drawInRect:rect];
-  [_color setStroke];
+  [_strokeColor setStroke];
   [_path stroke];
 }
 
@@ -111,9 +111,15 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 {
   UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0);
 
+  // Paint background if fillColor property provided
+  if (!_image && _fillColor) {
+    [_fillColor setFill];
+    [[UIBezierPath bezierPathWithRect:self.bounds] fill];
+  }
+
   // Draw with context
   [_image drawAtPoint:CGPointZero];
-  [_color setStroke];
+  [_strokeColor setStroke];
   [_path stroke];
   _image = UIGraphicsGetImageFromCurrentImageContext();
 
@@ -160,14 +166,19 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 
 #pragma mark - Setters
 
-- (void)setColor:(UIColor *)color
+- (void)setFillColor:(UIColor *)fillColor
 {
-  _color = color;
+  _fillColor = fillColor;
 }
 
-- (void)setThickness:(NSInteger)thickness
+- (void)setStrokeColor:(UIColor *)strokeColor
 {
-  _path.lineWidth = thickness;
+  _strokeColor = strokeColor;
+}
+
+- (void)setStrokeThickness:(NSInteger)strokeThickness
+{
+  _path.lineWidth = strokeThickness;
 }
 
 @end
