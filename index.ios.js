@@ -4,7 +4,6 @@ import { NativeModules, requireNativeComponent, View } from 'react-native';
 const SketchManager = NativeModules.RNSketchManager || {};
 
 export default class Sketch extends React.Component {
-
   static propTypes = {
     fillColor: React.PropTypes.string,
     imageType: React.PropTypes.oneOf(['jpg', 'png']),
@@ -13,7 +12,7 @@ export default class Sketch extends React.Component {
     strokeColor: React.PropTypes.string,
     strokeThickness: React.PropTypes.number,
     style: View.propTypes.style,
-  }
+  };
 
   static defaultProps = {
     fillColor: null,
@@ -23,7 +22,7 @@ export default class Sketch extends React.Component {
     strokeColor: '#000000',
     strokeThickness: 1,
     style: null,
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -37,23 +36,23 @@ export default class Sketch extends React.Component {
 
   state = {
     imageData: null,
-  }
+  };
 
   onChange = (event) => {
     const { imageData } = event.nativeEvent;
 
     this.setState({ imageData });
     this.props.onChange(imageData);
-  }
+  };
 
   onClear = () => {
     this.setState({ imageData: null });
     this.props.onClear();
-  }
+  };
 
-  clear = () => SketchManager.clearDrawing()
+  clear = () => SketchManager.clearDrawing();
 
-  save = () => SketchManager.saveDrawing(this.state.imageData, this.props.imageType)
+  save = () => SketchManager.saveDrawing(this.state.imageData, this.props.imageType);
 
   render() {
     return (
@@ -65,7 +64,6 @@ export default class Sketch extends React.Component {
       />
     );
   }
-
 }
 
 const RNSketch = requireNativeComponent('RNSketch', Sketch);
