@@ -3,6 +3,7 @@
   "parser": "babel-eslint",
   "rules": {
     "react/jsx-filename-extension": "off",
-    "react/no-unused-prop-types": "warn"
+    "react/no-unused-prop-types": "warn",
+    "no-use-before-define": "off"
   }
 }
