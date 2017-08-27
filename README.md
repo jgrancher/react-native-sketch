@@ -6,7 +6,7 @@
 
 A React Native component for touch-based drawing.
 
-![Capture](https://user-images.githubusercontent.com/5517450/29750233-6ecd0c78-8b7f-11e7-9fa2-3e589a8851c5.gif)
+![Capture](https://user-images.githubusercontent.com/5517450/29750544-da3be86c-8b84-11e7-8996-49521f7a13b3.gif)
 
 ## Features
 
