@@ -1,86 +1,75 @@
 import React from 'react';
-import {
-  NativeModules,
-  requireNativeComponent,
-  View,
-} from 'react-native';
-
-const { func, number, string, bool, oneOf } = React.PropTypes;
+import PropTypes from 'prop-types';
+import { NativeModules, requireNativeComponent, View } from 'react-native';
 
 const SketchManager = NativeModules.RNSketchManager || {};
 
 export default class Sketch extends React.Component {
-
   static propTypes = {
-    fillColor: string,
-    onReset: func,
-    onUpdate: func,
-    clearButtonHidden: bool,
-    strokeColor: string,
-    strokeThickness: number,
+    fillColor: PropTypes.string,
+    imageType: PropTypes.oneOf(['jpg', 'png']),
+    onChange: PropTypes.func,
+    onClear: PropTypes.func,
+    strokeColor: PropTypes.string,
+    strokeThickness: PropTypes.number,
     style: View.propTypes.style,
-    imageType: oneOf(['jpg', 'png']),
   };
 
   static defaultProps = {
-    fillColor: '#ffffff',
-    onReset: () => {},
-    onUpdate: () => {},
-    clearButtonHidden: false,
+    fillColor: null,
+    imageType: 'png',
+    onChange: () => {},
+    onClear: () => {},
     strokeColor: '#000000',
     strokeThickness: 1,
     style: null,
-    imageType: 'jpg',
   };
 
   constructor(props) {
     super(props);
-    this.onReset = this.onReset.bind(this);
-    this.onUpdate = this.onUpdate.bind(this);
-    this.getBase64Code = this.getBase64Code.bind(this);
+
+    // Sketch base style properties
+    this.style = {
+      flex: 1,
+      backgroundColor: 'transparent',
+    };
   }
 
-  onReset() {
-    this.props.onUpdate(null);
-    this.props.onReset();
-  }
+  state = {
+    imageData: null,
+  };
 
-  onUpdate(e) {
-    this.props.onUpdate(`${this.getBase64Code()}${e.nativeEvent.image}`);
-  }
+  onChange = (event) => {
+    const { imageData } = event.nativeEvent;
 
-  getBase64Code() {
-    return `data:image/${this.props.imageType};base64,`;
-  }
+    this.setState({ imageData });
+    this.props.onChange(imageData);
+  };
 
-  saveImage(image) {
-    if (typeof image !== 'string') {
-      return Promise.reject('You need to provide a valid base64 encoded image.');
-    }
+  onClear = () => {
+    this.setState({ imageData: null });
+    this.props.onClear();
+  };
 
-    const base64Code = this.getBase64Code();
-    const src = image.indexOf(base64Code) === 0 ? image.replace(base64Code, '') : image;
-    return SketchManager.saveImage(src, this.props.imageType);
-  }
+  clear = () => SketchManager.clearDrawing();
 
-  clear() {
-    return SketchManager.clear();
-  }
+  save = () => SketchManager.saveDrawing(this.state.imageData, this.props.imageType);
 
   render() {
+    const { fillColor, strokeColor, strokeThickness, ...props } = this.props;
+
     return (
       <RNSketch
-        {...this.props}
-        onChange={this.onUpdate}
-        onReset={this.onReset}
-        style={[{
-          flex: 1,
-          backgroundColor: this.props.fillColor,
-        }, this.props.style]}
+        {...props}
+        fillColor={fillColor}
+        onChange={this.onChange}
+        onClear={this.onClear}
+        strokeColor={strokeColor}
+        strokeThickness={strokeThickness}
+        style={[this.style, this.props.style]}
       />
     );
   }
-
 }
 
 const RNSketch = requireNativeComponent('RNSketch', Sketch);

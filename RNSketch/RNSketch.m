@@ -6,7 +6,6 @@
 //  Copyright © 2016 Jeremy Grancher. All rights reserved.
 //
 
-#import <React/RCTEventDispatcher.h>
 #import <React/RCTView.h>
 #import <React/UIView+React.h>
 #import "RNSketch.h"
@@ -15,38 +14,30 @@
 @implementation RNSketch
 {
   // Internal
-  RCTEventDispatcher *_eventDispatcher;
-  UIButton *_clearButton;
   UIBezierPath *_path;
   UIImage *_image;
   CGPoint _points[5];
   uint _counter;
-
-  // Configuration settings
-  UIColor *_fillColor;
-  UIColor *_strokeColor;
-  NSString *_imageType;
 }
-
 
 #pragma mark - UIViewHierarchy methods
 
-
-- (instancetype)initWithEventDispatcher:(RCTEventDispatcher *)eventDispatcher
+- (instancetype)initWithFrame:(CGRect) frame
 {
-  if ((self = [super init])) {
+  if ((self = [super initWithFrame:frame])) {
     // Internal setup
     self.multipleTouchEnabled = NO;
+
     // For borderRadius property to work (CALayer's cornerRadius).
     self.layer.masksToBounds = YES;
-    _eventDispatcher = eventDispatcher;
-    _path = [UIBezierPath bezierPath];
 
-    [self initClearButton];
+    _path = [UIBezierPath bezierPath];
   }
 
   return self;
 }
+
+RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 
 - (void)layoutSubviews
 {
@@ -54,39 +45,7 @@
   [self drawBitmap];
 }
 
-- (void)setClearButtonHidden:(BOOL)hidden
-{
-  _clearButton.hidden = hidden;
-}
-
-
-#pragma mark - Subviews
-
-
-- (void)initClearButton
-{
-  // Clear button
-  CGRect frame = CGRectMake(0, 0, 40, 40);
-  _clearButton = [UIButton buttonWithType:UIButtonTypeSystem];
-  _clearButton.frame = frame;
-  _clearButton.enabled = false;
-  _clearButton.tintColor = [UIColor blackColor];
-  _clearButton.titleLabel.font = [UIFont boldSystemFontOfSize:18];
-  [_clearButton setTitle:@"x" forState:UIControlStateNormal];
-  [_clearButton addTarget:self action:@selector(clearDrawing) forControlEvents:UIControlEventTouchUpInside];
-
-  // Clear button background
-  UIButton *background = [UIButton buttonWithType:UIButtonTypeCustom];
-  background.frame = frame;
-
-  // Add subviews
-  [self addSubview:background];
-  [self addSubview:_clearButton];
-}
-
-
 #pragma mark - UIResponder methods
-
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
@@ -106,9 +65,6 @@
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-  // Enabling to clear
-  [_clearButton setEnabled:true];
-
   [self drawBitmap];
   [self setNeedsDisplay];
 
@@ -116,11 +72,7 @@
   _counter = 0;
 
   // Send event
-  NSDictionary *bodyEvent = @{
-                              @"target": self.reactTag,
-                              @"image": [self drawingToString],
-                              };
-  [_eventDispatcher sendInputEventWithName:@"topChange" body:bodyEvent];
+  if (_onChange) _onChange(@{ @"imageData": [self drawingToString] });
 }
 
 - (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -128,9 +80,7 @@
   [self touchesEnded:touches withEvent:event];
 }
 
-
 #pragma mark - UIViewRendering methods
-
 
 - (void)drawRect:(CGRect)rect
 {
@@ -139,9 +89,7 @@
   [_path stroke];
 }
 
-
 #pragma mark - Drawing methods
-
 
 - (void)drawCurve
 {
@@ -163,7 +111,7 @@
 {
   UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0);
 
-  // If first time, paint background
+  // Paint background if fillColor property provided
   if (!_image && _fillColor) {
     [_fillColor setFill];
     [[UIBezierPath bezierPathWithRect:self.bounds] fill];
@@ -178,47 +126,45 @@
   UIGraphicsEndImageContext();
 }
 
-
 #pragma mark - Export drawing
-
 
 - (NSString *)drawingToString
 {
+  NSString *imageData = nil;
+
   if ([_imageType isEqualToString:@"jpg"]) {
-    return [UIImageJPEGRepresentation(_image, 1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    imageData = [UIImageJPEGRepresentation(_image, 1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
   } else if ([_imageType isEqualToString:@"png"]) {
-    return [UIImagePNGRepresentation(_image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    imageData = [UIImagePNGRepresentation(_image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+  } else {
+    [NSException raise:@"Invalid image type" format:@"%@ is not a valid image type for exporting the drawing.", _imageType];
   }
 
-  [NSException raise:@"Invalid image type" format:@"%@ is not a valid image type for exporting the drawing.", _imageType];
-
-  return nil;
+  return [[self base64Code] stringByAppendingString:imageData];
 }
-
 
 #pragma mark - Clear drawing
 
-
-- (void)clearDrawing
+- (void)clear
 {
-  // Disabling to clear
-  [_clearButton setEnabled:false];
-
   _image = nil;
 
   [self drawBitmap];
   [self setNeedsDisplay];
 
   // Send event
-  NSDictionary *bodyEvent = @{
-                              @"target": self.reactTag,
-                              };
-  [_eventDispatcher sendInputEventWithName:@"onReset" body:bodyEvent];
+  if (_onClear) _onClear(@{});
+  if (_onChange) _onChange(@{});
 }
 
+#pragma mark - Helpers
+
+- (NSString *)base64Code
+{
+  return [NSString stringWithFormat:@"data:image/%@;base64,", _imageType];
+}
 
 #pragma mark - Setters
-
 
 - (void)setFillColor:(UIColor *)fillColor
 {
@@ -233,11 +179,6 @@
 - (void)setStrokeThickness:(NSInteger)strokeThickness
 {
   _path.lineWidth = strokeThickness;
-}
-
-- (void)setImageType:(NSString *)imageType
-{
-  _imageType = imageType;
 }
 
 @end
