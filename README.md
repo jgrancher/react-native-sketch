@@ -6,7 +6,7 @@
 
 A React Native component for touch-based drawing.
 
-![Screenshots](https://cloud.githubusercontent.com/assets/5517450/15202227/ca865758-183b-11e6-8c4e-41080bc04538.jpg "Disclaimer: This is not my signature ;)")
+![Capture](https://user-images.githubusercontent.com/5517450/29750233-6ecd0c78-8b7f-11e7-9fa2-3e589a8851c5.gif)
 
 ## Features
 
@@ -19,7 +19,7 @@ A React Native component for touch-based drawing.
 Install the module from npm:
 
 ```bash
-npm install react-native-sketch
+npm i -S react-native-sketch
 ```
 
 Link the module to your project:
@@ -69,23 +69,23 @@ Here are the `props` of the the component:
 | `imageType` | `String` | `png` | The type of image to export. Can be `png` or `jpg`. Default to `png` to get transparency out of the box. |
 | `onChange` | `Function` | `() => {}` | Callback function triggered after every change on the drawing. The function takes one argument: the actual base64 representation of your drawing.|
 | `onClear` | `Function` | `() => {}` | Callback function triggered after a `clear` has been triggered. |
-| `strokeColor` | `String` | `#000000` | The color of the stroke with which you want to draw. |
-| `strokeThickness` | `Number` | `1` | The stroke thickness in pixels. |
-| `style` | `` | `null` | Some `View` styles if you need. |
+| `strokeColor` | `String` | `'#000000'` | The stroke color you want to draw with. |
+| `strokeThickness` | `Number` | `1` | The stroke thickness, in pixels. |
+| `style` | Style object | `null` | Some `View` styles if you need. |
 
 The component also has some instance methods:
 
 | Name | Return type | Comment |
 | ---- | ----------- | ------- |
-| `clear()` | `Promise` | Clear the drawing. This method is a Promise mostly to be consistent with the `save()` one, but you could simply type: `this.sketch.clear();` |
+| `clear()` | `Promise` | Clear the drawing. This method is a Promise mostly to be consistent with `save()`, but you could simply type: `this.sketch.clear();` |
 | `save()` | `Promise` | Save the drawing to an image, using the defined props as settings (`imageType`, `fillColor`, etc...). The Promise resolves with an object containing the `path` property of that image. Ex: `this.sketch.save().then(image => console.log(image.path));` |
 
 ## Examples
 
 The project contains a folder `examples` that contains few demos of how to use `react-native-sketch`. Just copy and paste the code to your React Native application.
 
-- [`ios-digital-touch.js`](https://github.com/jgrancher/react-native-sketch/tree/master/examples/ios-digital-touch.js): uses few colors buttons to reproduce the behaviour of iOS10 Message Digital Touch.
-- []
+- [`Basic`](https://github.com/jgrancher/react-native-sketch/tree/master/examples/basic): uses the bare minimum to make it work.
+- [`Digital Touch`](https://github.com/jgrancher/react-native-sketch/tree/master/examples/digital-touch): tries to reproduce the look and feel of iOS Message Digital Touch.
 
 Feel free to play with them!
 

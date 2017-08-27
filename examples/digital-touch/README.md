@@ -1,8 +1,10 @@
-/**
- * React Native Sketch - iOS Digital Touch example
- * Reproduces the look and feel of iOS10 Messages Digital Touch (simplified)
- */
+# Digital Touch example
 
+Reproduces (in a simplified way) the look and feel of iOS Messages [Digital Touch](https://support.apple.com/en-au/HT206896).
+
+### Source Code
+
+```javascript
 import React, { Component } from 'react';
 import Sketch from 'react-native-sketch';
 import {
@@ -88,7 +90,7 @@ export default class DigitalTouch extends Component {
         </View>
         <Modal animationType="slide" visible={!!this.state.path}>
           <View style={styles.modal}>
-            <Text style={styles.title}>Here's the image you created.</Text>
+            <Text style={styles.title}>Here is the image you created.</Text>
             <Image
               resizeMode="contain"
               source={{ uri: `file://${this.state.path}` }}
@@ -148,3 +150,7 @@ const styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('DigitalTouch', () => DigitalTouch);
+```
+
+### Results
+![Screenshot](https://user-images.githubusercontent.com/5517450/29750256-b138719c-8b7f-11e7-8de6-9d5f6a8d6528.png)
