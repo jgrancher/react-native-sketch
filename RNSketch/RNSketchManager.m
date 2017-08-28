@@ -6,40 +6,29 @@
 //  Copyright © 2016 Jeremy Grancher. All rights reserved.
 //
 
-#import <React/RCTEventDispatcher.h>
 #import <React/RCTView.h>
 #import <React/UIView+React.h>
 #import "RNSketch.h"
 #import "RNSketchManager.h"
 
-#define ERROR_IMAGE_INVALID @"ERROR_IMAGE_INVALID"
-#define ERROR_FILE_CREATION @"ERROR_FILE_CREATION"
+#define ERROR_INVALID_BASE_64 @"ERROR_INVALID_BASE_64"
+#define ERROR_UNABLE_SAVE_DRAWING @"ERROR_UNABLE_SAVE_DRAWING"
 
 @implementation RNSketchManager
 
 RCT_EXPORT_MODULE()
 
+#pragma mark - Events
+
+RCT_EXPORT_VIEW_PROPERTY(onChange, RCTBubblingEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onClear, RCTBubblingEventBlock);
+
 #pragma mark - Properties
 
-
-RCT_CUSTOM_VIEW_PROPERTY(fillColor, UIColor, RNSketch)
-{
-  [view setFillColor:json ? [RCTConvert UIColor:json] : [UIColor whiteColor]];
-}
-RCT_CUSTOM_VIEW_PROPERTY(strokeColor, UIColor, RNSketch)
-{
-  [view setStrokeColor:json ? [RCTConvert UIColor:json] : [UIColor blackColor]];
-}
-RCT_CUSTOM_VIEW_PROPERTY(clearButtonHidden, BOOL, RNSketch)
-{
-  [view setClearButtonHidden:json ? [RCTConvert BOOL:json] : NO];
-}
-RCT_EXPORT_VIEW_PROPERTY(strokeThickness, NSInteger)
-
-RCT_CUSTOM_VIEW_PROPERTY(imageType, NSString, RNSketch)
-{
-  [view setImageType:json ? [RCTConvert NSString:json] : @"jpg"];
-}
+RCT_EXPORT_VIEW_PROPERTY(fillColor, UIColor);
+RCT_EXPORT_VIEW_PROPERTY(imageType, NSString);
+RCT_EXPORT_VIEW_PROPERTY(strokeColor, UIColor);
+RCT_EXPORT_VIEW_PROPERTY(strokeThickness, NSInteger);
 
 #pragma mark - Lifecycle
 
@@ -55,35 +44,30 @@ RCT_CUSTOM_VIEW_PROPERTY(imageType, NSString, RNSketch)
 - (UIView *)view
 {
   if (!self.sketchView) {
-    self.sketchView = [[RNSketch alloc] initWithEventDispatcher:self.bridge.eventDispatcher];
+    self.sketchView = [[RNSketch alloc] initWithFrame:CGRectZero];
   }
 
   return self.sketchView;
 }
 
-#pragma mark - Event types
-
-
-- (NSArray *)customDirectEventTypes
-{
-  return @[
-           @"onReset",
-           ];
-}
-
-
 #pragma mark - Exported methods
 
-
-RCT_EXPORT_METHOD(saveImage:(NSString *)encodedImage
+RCT_EXPORT_METHOD(saveDrawing:(NSString *)encodedImage
                   ofType:(NSString *)imageType
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 {
+  // Strip the Base 64 Code out if it's there.
+  NSString *base64Code = [self.sketchView base64Code];
+  encodedImage = [encodedImage stringByReplacingOccurrencesOfString:base64Code
+                                                         withString:@""
+                                                            options:NULL
+                                                              range:NSMakeRange(0, [base64Code length])];
+
   // Create image data with base64 source
   NSData *imageData = [[NSData alloc] initWithBase64EncodedString:encodedImage options:NSDataBase64DecodingIgnoreUnknownCharacters];
   if (!imageData) {
-    return reject(ERROR_IMAGE_INVALID, @"You need to provide a valid base64 encoded image.", nil);
+    return reject(ERROR_INVALID_BASE_64, @"You need to provide a valid base64 encoded image.", nil);
   }
 
   // Create full path of image
@@ -95,15 +79,18 @@ RCT_EXPORT_METHOD(saveImage:(NSString *)encodedImage
   // Save image and return the path
   BOOL fileCreated = [fileManager createFileAtPath:fullPath contents:imageData attributes:nil];
   if (!fileCreated) {
-    return reject(ERROR_FILE_CREATION, @"An error occured. Impossible to save the file.", nil);
+    return reject(ERROR_UNABLE_SAVE_DRAWING, @"An error occured. Impossible to save the drawing.", nil);
   }
-  resolve(@{@"path": fullPath});
+
+  resolve(@{ @"path": fullPath });
 }
 
-RCT_EXPORT_METHOD(clear)
+RCT_EXPORT_METHOD(clearDrawing:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
 {
   dispatch_async(dispatch_get_main_queue(), ^{
-    [self.sketchView clearDrawing];
+    [self.sketchView clear];
+    resolve(@YES);
   });
 }
 
