@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#if __has_include(<React/RCTViewManager.h>)
+// React Native >= 0.40
 #import <React/UIView+React.h>
+#else
+// React Native <= 0.39
+#import "UIView+React.h"
+#endif
 
 @interface RNSketch : UIView
 
