@@ -2,6 +2,20 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v1.0.1] - 2017-04-29
+### Added
+- Added backward compatibility for React Native < 0.40 (Thanks [@peacechen](https://github.com/peacechen)!).
+
+## [v1.0.0] - 2017-08-28
+### Changed
+- Breaking change: Changed iOS native headers for compatibility with [React Native >= 0.40](https://github.com/facebook/react-native/releases/tag/v0.40.0).
+- The `onReset` event has been renamed `onClear`.
+- The `saveImage` method has been renamed `save` and doesn't require any argument.
+- The README.md has been updated with more documentation.
+
+### Added
+- Created an `examples` folder.
+
 ## [v0.5.0] - 2017-04-28
 ### Changed
 - Supports of `fillColor="transparent"` attribute value. Requires `imageType="png"` to export a transparent image (Thanks [@aprihodko](https://github.com/aprihodko) [@vccabral](https://github.com/vccabral)!).
