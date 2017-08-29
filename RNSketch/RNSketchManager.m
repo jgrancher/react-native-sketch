@@ -6,8 +6,15 @@
 //  Copyright © 2016 Jeremy Grancher. All rights reserved.
 //
 
+#if __has_include(<React/RCTView.h>)
+// React Native >= 0.40
 #import <React/RCTView.h>
 #import <React/UIView+React.h>
+#else
+// React Native <= 0.39
+#import "RCTView.h"
+#import "UIView+React.h"
+#endif
 #import "RNSketch.h"
 #import "RNSketchManager.h"
 
