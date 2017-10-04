@@ -12,7 +12,7 @@ export default class Sketch extends React.Component {
     onClear: PropTypes.func,
     strokeColor: PropTypes.string,
     strokeThickness: PropTypes.number,
-    imagePath: PropTypes.string,
+    imageData: PropTypes.string,
     style: View.propTypes.style,
   };
 
@@ -35,11 +35,17 @@ export default class Sketch extends React.Component {
       flex: 1,
       backgroundColor: 'transparent',
     };
+
+    this.state = {
+      imageData: props.imageData
+    }
   }
 
-  state = {
-    imageData: null,
-  };
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+        imageData: nextProps.imageData
+    })
+  }
 
   onChange = (event) => {
     const { imageData } = event.nativeEvent;
@@ -69,7 +75,7 @@ export default class Sketch extends React.Component {
         strokeColor={strokeColor}
         strokeThickness={strokeThickness}
         style={[this.style, this.props.style]}
-        imageURL={this.props.imagePath}
+        imageData={this.state.imageData}
       />
     );
   }
