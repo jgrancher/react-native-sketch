@@ -23,7 +23,7 @@ export default class Sketch extends React.Component {
     onClear: () => {},
     strokeColor: '#000000',
     strokeThickness: 1,
-    image: null,
+    imageData: null,
     style: null
   };
 
