@@ -1,8 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NativeModules, requireNativeComponent, View } from 'react-native';
+import {
+  NativeModules,
+  requireNativeComponent,
+  View,
+  ViewPropTypes
+} from 'react-native';
 
 const SketchManager = NativeModules.RNSketchManager || {};
+
+//Fallback when RN version is < 0.44
+const viewPropTypes = ViewPropTypes || View.propTypes;
 
 export default class Sketch extends React.Component {
   static propTypes = {
@@ -12,7 +20,7 @@ export default class Sketch extends React.Component {
     onClear: PropTypes.func,
     strokeColor: PropTypes.string,
     strokeThickness: PropTypes.number,
-    style: View.propTypes.style,
+    style: viewPropTypes.style,
   };
 
   static defaultProps = {
