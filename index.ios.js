@@ -56,7 +56,11 @@ export default class Sketch extends React.Component {
 
   clear = () => SketchManager.clearDrawing();
 
-  save = () => SketchManager.saveDrawing(this.state.imageData, this.props.imageType);
+  save = () => {
+    if (!this.state.imageData) return Promise.reject('No image provided!');
+
+    return SketchManager.saveDrawing(this.state.imageData, this.props.imageType);
+  };
 
   render() {
     const { fillColor, strokeColor, strokeThickness, ...props } = this.props;
