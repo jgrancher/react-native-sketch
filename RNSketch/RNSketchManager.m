@@ -101,4 +101,11 @@ RCT_EXPORT_METHOD(clearDrawing:(RCTPromiseResolveBlock)resolve
   });
 }
 
+#pragma mark - Class methods
+
++ (BOOL)requiresMainQueueSetup
+{
+    return YES;
+}
+
 @end
