@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. This project adheres to
 [Semantic Versioning](http://semver.org/).
 
+## [v1.0.3] - 2017-11-20
+
+### Changed
+
+* Added the [`requiresMainQueueSetup()` method](https://github.com/jgrancher/react-native-sketch/commit/d8d20707561cc09f9682ac13f07782543ac4fd7e) to fix a warning on RN 0.49+.
+* [Fixed #37](https://github.com/jgrancher/react-native-sketch/issues/37): Preventing a crash when trying to save an image without drawing first.
+
 ## [v1.0.2] - 2017-11-13
 
 ### Changed
