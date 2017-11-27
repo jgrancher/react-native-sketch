@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file. This project adheres to
 [Semantic Versioning](http://semver.org/).
 
+## [v1.1.0] - 2017-11-27
+
+### Added
+
+* Added the ability to draw a small dot by just tapping the screen without moving your finger. (`onChange` is then called as usual but the drawing actually changes, which fixes [#25](https://github.com/jgrancher/react-native-sketch/issues/25). Kudos to [@lucastrazzullo](https://github.com/lucastrazzullo) for helping me!)
+
 ## [v1.0.3] - 2017-11-20
 
 ### Changed
