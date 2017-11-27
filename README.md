@@ -92,11 +92,11 @@ Feel free to play with them!
 ## Known issues
 
 - Rotating the screen gets to a weird behavior of the sketch view: [#23](https://github.com/jgrancher/react-native-sketch/issues/23)
-- Taping the screen without dragging your finger causes an update but does not display any point: [#25](https://github.com/jgrancher/react-native-sketch/issues/25)
 
 ## Notes
 
-- The module is available *only on iOS* (for now), as I don't know Android development... But if you think you can help on that matter, please feel free to [contact me](https://twitter.com/jgrancher)!
+- If you're using Expo, you will have to [`detach` to ExpoKit](https://docs.expo.io/versions/latest/guides/detach.html), as this module uses native iOS code.
+- The module is available *only on iOS for now*, as I don't know Android development... But if you think you can help on that matter, please feel free to create a Pull Request!
 - The module uses this [smooth freehand drawing technique](http://code.tutsplus.com/tutorials/smooth-freehand-drawing-on-ios--mobile-13164) under the hood.
 
 ## Contributing
