@@ -64,3 +64,13 @@ Carthage/Build
 
 fastlane/report.xml
 fastlane/screenshots
+
+# Android specific
+.idea
+local.properties
+android/RNSketch.iml
+.settings
+.project
+/build
+.gradle
+proguard-rules.pro

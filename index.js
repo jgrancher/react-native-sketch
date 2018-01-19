@@ -79,4 +79,16 @@ export default class Sketch extends React.Component {
   }
 }
 
-const RNSketch = requireNativeComponent('RNSketch', Sketch);
+const RNSketch = requireNativeComponent('RNSketch', Sketch, {
+  nativeOnly: {
+    onChange: true,
+    onLayout: true,
+    testID: true,
+    nativeID: true,
+    importantForAccessibility: true,
+    accessibilityLiveRegion: true,
+    accessibilityComponentType: true,
+    accessibilityLabel: true,
+    renderToHardwareTextureAndroid: true,
+  }
+});
