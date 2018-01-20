@@ -9,19 +9,16 @@ import android.graphics.Path;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.facebook.react.uimanager.SimpleViewManager;
-
 public class RNSketchView extends View {
     private Path path;
     private Paint paint;
-    private Color penColor;
 
     public RNSketchView(Context context) {
         super(context);
 
         path = new Path();
         paint = new Paint();
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.CYAN);
         paint.setAntiAlias(true);
         paint.setStrokeWidth(5);
         paint.setStyle(Paint.Style.STROKE);
@@ -70,12 +67,16 @@ public class RNSketchView extends View {
         return true;
     }
 
-    public void clearPath() {
+    public void clear() {
         path.reset();
         invalidate();
     }
 
     public void savePath() {
         System.out.println("SAVE!");
+    }
+
+    public void setStrokeColor(String strokeColor) {
+        paint.setColor(Color.parseColor(strokeColor));
     }
 }

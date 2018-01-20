@@ -90,5 +90,5 @@ const RNSketch = requireNativeComponent('RNSketch', Sketch, {
     accessibilityComponentType: true,
     accessibilityLabel: true,
     renderToHardwareTextureAndroid: true,
-  }
+  },
 });
