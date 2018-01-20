@@ -9,24 +9,33 @@ import android.graphics.Path;
 import android.view.MotionEvent;
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 public class RNSketchView extends View {
     private Path path;
+    private ArrayList<Path> paths = new ArrayList<Path>();
     private Paint paint;
+    private String imageType = "png";
+    int paintColor = Color.BLACK;
+    private Map<Path, Integer> colorMap = new HashMap<Path, Integer>();
 
     public RNSketchView(Context context) {
         super(context);
 
-        path = new Path();
         paint = new Paint();
-        paint.setColor(Color.CYAN);
+        path = new Path();
+
+        paint.setStrokeWidth(1f);
         paint.setAntiAlias(true);
-        paint.setStrokeWidth(5);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStrokeCap(Paint.Cap.ROUND);
     }
 
     private void touchStart(float x, float y) {
+        path.reset();
         path.moveTo(x, y);
     }
 
@@ -34,8 +43,21 @@ public class RNSketchView extends View {
         path.lineTo(x, y);
     }
 
+    private void touchUp(float x, float y) {
+        path.lineTo(x, y);
+        paths.add(path);
+        colorMap.put(path, paintColor);
+        path = new Path();
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
+        for (Path p : paths) {
+            paint.setColor(colorMap.get(p));
+            canvas.drawPath(p, paint);
+        }
+
+        paint.setColor(paintColor);
         canvas.drawPath(path, paint);
     }
 
@@ -58,6 +80,7 @@ public class RNSketchView extends View {
                 touchMove(x, y);
                 break;
             case MotionEvent.ACTION_UP:
+                touchUp(x, y);
                 break;
             default:
                 return false;
@@ -77,6 +100,14 @@ public class RNSketchView extends View {
     }
 
     public void setStrokeColor(String strokeColor) {
-        paint.setColor(Color.parseColor(strokeColor));
+        paintColor = Color.parseColor(strokeColor);
+    }
+
+    public void setStrokeThickness(int strokeThickness) {
+        paint.setStrokeWidth(strokeThickness);
+    }
+
+    public void setImageType(String imageType) {
+        this.imageType = imageType;
     }
 }
