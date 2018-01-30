@@ -147,16 +147,4 @@ public class RNSketchView extends View {
 
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
-
-    public void setStrokeColor(String strokeColor) {
-        paintColor = Color.parseColor(strokeColor);
-    }
-
-    public void setStrokeThickness(int strokeThickness) {
-        paint.setStrokeWidth(strokeThickness);
-    }
-
-    public void setImageType(String imageType) {
-        this.imageType = imageType;
-    }
 }

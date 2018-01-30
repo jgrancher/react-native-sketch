@@ -39,19 +39,4 @@ public class RNSketchViewManager extends SimpleViewManager<RNSketchView> {
     public void setImageType(RNSketchView view, String imageType) {
         view.setImageType(imageType);
     }
-
-    @ReactProp(name = "strokeColor")
-    public void setStrokeColor(RNSketchView view, String strokeColor) {
-        view.setStrokeColor(strokeColor);
-    }
-
-    @ReactProp(name = "strokeThickness")
-    public void setStrokeThickness(RNSketchView view, int strokeThickness) {
-        view.setStrokeThickness(strokeThickness);
-    }
-
-    @ReactProp(name = "imageType")
-    public void setImageType(RNSketchView view, String imageType) {
-        view.setImageType(imageType);
-    }
 }
