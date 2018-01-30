@@ -11,6 +11,11 @@ import android.util.Base64;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.uimanager.events.RCTEventEmitter;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -19,6 +24,8 @@ import java.util.Map;
 
 public class RNSketchView extends View {
     FileOutputStream stream;
+
+    private ReactContext context;
     private Path path;
     private ArrayList<Path> paths = new ArrayList<Path>();
     private Paint paint;
@@ -31,8 +38,10 @@ public class RNSketchView extends View {
 
     int paintColor = Color.BLACK;
 
-    public RNSketchView(Context context) {
+    public RNSketchView(ReactContext context) {
         super(context);
+
+        this.context = context;
 
         paint = new Paint();
         path = new Path();
@@ -69,6 +78,14 @@ public class RNSketchView extends View {
         colorMap.put(path, paintColor);
         path = new Path();
         strokeWidths.add(strokeThickness);
+
+        WritableMap events = Arguments.createMap();
+        events.putString("imageData", drawingToString());
+        context.getJSModule(RCTEventEmitter.class).receiveEvent(
+            getId(),
+            "topChange",
+            events
+        );
     }
 
     @Override
