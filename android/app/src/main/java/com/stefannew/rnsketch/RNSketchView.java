@@ -1,7 +1,6 @@
 package com.stefannew.rnsketch;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -30,11 +29,11 @@ public class RNSketchView extends View {
     private ArrayList<Path> paths = new ArrayList<Path>();
     private Paint paint;
     private String imageType = "png";
-    private Bitmap bitmap;
-    private ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
     private Map<Path, Integer> colorMap = new HashMap<Path, Integer>();
     private ArrayList<Float> strokeWidths = new ArrayList<>();
     private float strokeThickness = 1f;
+
+    private Bitmap bitmap;
 
     int paintColor = Color.BLACK;
 
@@ -51,12 +50,14 @@ public class RNSketchView extends View {
         paint.setStrokeWidth(strokeThickness);
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStyle(Paint.Style.STROKE);
+
+        setDrawingCacheEnabled(true);
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas();
+        Canvas canvas = new Canvas(bitmap);
 
         if (bitmap != null) {
             canvas.drawBitmap(bitmap, 0, 0, null);
@@ -80,7 +81,7 @@ public class RNSketchView extends View {
         strokeWidths.add(strokeThickness);
 
         WritableMap events = Arguments.createMap();
-        events.putString("imageData", drawingToString());
+        events.putString("imageData", drawingToString(getDrawingCache()));
         context.getJSModule(RCTEventEmitter.class).receiveEvent(
             getId(),
             "topChange",
@@ -154,8 +155,9 @@ public class RNSketchView extends View {
 
     public void saveDrawing() { }
 
-    public String drawingToString() {
+    public String drawingToString(Bitmap bitmap) {
         Bitmap.CompressFormat format;
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
         switch (imageType) {
             case "png":
@@ -169,8 +171,6 @@ public class RNSketchView extends View {
         }
 
         bitmap.compress(format, 100, byteArrayOutputStream);
-        byte[] byteArray = byteArrayOutputStream.toByteArray();
-
-        return Base64.encodeToString(byteArray, Base64.DEFAULT);
+        return Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
     }
 }
