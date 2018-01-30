@@ -6,7 +6,7 @@ import com.facebook.react.uimanager.ThemedReactContext;
 
 public class RNSketchViewManager extends SimpleViewManager<RNSketchView> {
 
-    protected static final String REACT_CLASS = "RNSketch";
+    private static final String REACT_CLASS = "RNSketch";
 
     @Override
     public String getName() {
@@ -15,7 +15,29 @@ public class RNSketchViewManager extends SimpleViewManager<RNSketchView> {
 
     @Override
     protected RNSketchView createViewInstance(ThemedReactContext reactContext) {
-        return new RNSketchView(reactContext);
+        RNSketchView rnSketchView = new RNSketchView(reactContext);
+        new ViewInstanceManager().setView(rnSketchView);
+        return rnSketchView;
+    }
+
+    @ReactProp(name = "fillColor")
+    public void setFillColor(RNSketchView view, String fillColor) {
+        view.setFillColor(fillColor);
+    }
+
+    @ReactProp(name = "strokeColor")
+    public void setStrokeColor(RNSketchView view, String strokeColor) {
+        view.setStrokeColor(strokeColor);
+    }
+
+    @ReactProp(name = "strokeThickness")
+    public void setStrokeThickness(RNSketchView view, int strokeThickness) {
+        view.setStrokeThickness(strokeThickness);
+    }
+
+    @ReactProp(name = "imageType")
+    public void setImageType(RNSketchView view, String imageType) {
+        view.setImageType(imageType);
     }
 
     @ReactProp(name = "strokeColor")

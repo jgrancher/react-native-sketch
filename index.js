@@ -43,6 +43,7 @@ export default class Sketch extends React.Component {
   };
 
   onChange = (event) => {
+    console.log(event);
     const { imageData } = event.nativeEvent;
 
     this.setState({ imageData });
@@ -50,11 +51,14 @@ export default class Sketch extends React.Component {
   };
 
   onClear = () => {
+    console.log('HELLO CLEAR');
     this.setState({ imageData: null });
     this.props.onClear();
   };
 
-  clear = () => SketchManager.clearDrawing();
+  clear = () => {
+    SketchManager.clearDrawing();
+  }
 
   save = () => {
     if (!this.state.imageData) return Promise.reject('No image provided!');
