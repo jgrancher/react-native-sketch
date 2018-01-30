@@ -21,9 +21,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressLint("ViewConstructor")
 public class RNSketchView extends View {
-    FileOutputStream stream;
-
     private ReactContext context;
     private Path path;
     private ArrayList<Path> paths = new ArrayList<Path>();
@@ -32,8 +31,6 @@ public class RNSketchView extends View {
     private Map<Path, Integer> colorMap = new HashMap<Path, Integer>();
     private ArrayList<Float> strokeWidths = new ArrayList<>();
     private float strokeThickness = 1f;
-
-    private Bitmap bitmap;
 
     int paintColor = Color.BLACK;
 
@@ -52,16 +49,6 @@ public class RNSketchView extends View {
         paint.setStyle(Paint.Style.STROKE);
 
         setDrawingCacheEnabled(true);
-    }
-
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-
-        if (bitmap != null) {
-            canvas.drawBitmap(bitmap, 0, 0, null);
-        }
     }
 
     private void touchStart(float x, float y) {
