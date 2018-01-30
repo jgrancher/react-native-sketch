@@ -23,9 +23,11 @@ public class RNSketchView extends View {
     private ArrayList<Path> paths = new ArrayList<Path>();
     private Paint paint;
     private String imageType = "png";
-    private Map<Path, Integer> colorMap = new HashMap<Path, Integer>();
     private Bitmap bitmap;
     private ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+    private Map<Path, Integer> colorMap = new HashMap<Path, Integer>();
+    private ArrayList<Float> strokeWidths = new ArrayList<>();
+    private float strokeThickness = 1f;
 
     int paintColor = Color.BLACK;
 
@@ -33,10 +35,11 @@ public class RNSketchView extends View {
         super(context);
 
         paint = new Paint();
+        path = new Path();
 
         paint.setAntiAlias(true);
         paint.setStrokeCap(Paint.Cap.ROUND);
-        paint.setStrokeWidth(1f);
+        paint.setStrokeWidth(strokeThickness);
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStyle(Paint.Style.STROKE);
     }
@@ -65,16 +68,21 @@ public class RNSketchView extends View {
         paths.add(path);
         colorMap.put(path, paintColor);
         path = new Path();
+        strokeWidths.add(strokeThickness);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        for (Path p : paths) {
-            paint.setColor(colorMap.get(p));
-            canvas.drawPath(p, paint);
+        for (int i = 0; i < paths.size(); i++) {
+            Path path = paths.get(i);
+
+            paint.setColor(colorMap.get(path));
+            paint.setStrokeWidth(strokeWidths.get(i));
+            canvas.drawPath(path, paint);
         }
 
         paint.setColor(paintColor);
+        paint.setStrokeWidth(strokeThickness);
         canvas.drawPath(path, paint);
     }
 
@@ -114,7 +122,7 @@ public class RNSketchView extends View {
     public void setFillColor(String fillColor) {}
 
     public void setStrokeThickness(int strokeThickness) {
-        paint.setStrokeWidth(strokeThickness);
+        this.strokeThickness = (float) strokeThickness;
     }
 
     public void setImageType(String imageType) {
@@ -123,6 +131,7 @@ public class RNSketchView extends View {
 
     public void clearDrawing() {
         paths.clear();
+        strokeWidths.clear();
         invalidate();
     }
 
