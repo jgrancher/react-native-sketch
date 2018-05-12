@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NativeModules, requireNativeComponent, View, ViewPropTypes } from 'react-native';
+import { DeviceEventEmitter, NativeModules, requireNativeComponent, View, ViewPropTypes } from 'react-native';
 
 const SketchManager = NativeModules.RNSketchManager || {};
 
@@ -42,16 +42,13 @@ export default class Sketch extends React.Component {
     imageData: null,
   };
 
-  onChange = (event) => {
-    console.log(event);
+  onChange = event => {
     const { imageData } = event.nativeEvent;
-
     this.setState({ imageData });
     this.props.onChange(imageData);
   };
 
   onClear = () => {
-    console.log('HELLO CLEAR');
     this.setState({ imageData: null });
     this.props.onClear();
   };
@@ -62,9 +59,16 @@ export default class Sketch extends React.Component {
 
   save = () => {
     if (!this.state.imageData) return Promise.reject('No image provided!');
-
     return SketchManager.saveDrawing(this.state.imageData, this.props.imageType);
   };
+
+  componentWillMount() {
+    DeviceEventEmitter.addListener("onClear", this.onClear);
+  }
+
+  componentWillUnmount() {
+    DeviceEventEmitter.removeListener("onClear", this.onClear);
+  }
 
   render() {
     const { fillColor, strokeColor, strokeThickness, ...props } = this.props;

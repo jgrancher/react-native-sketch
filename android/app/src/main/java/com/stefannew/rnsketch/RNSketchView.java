@@ -2,6 +2,7 @@ package com.stefannew.rnsketch;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -13,13 +14,17 @@ import android.view.View;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @SuppressLint("ViewConstructor")
 public class RNSketchView extends View {
@@ -138,13 +143,16 @@ public class RNSketchView extends View {
         paths.clear();
         strokeWidths.clear();
         invalidate();
+
+        WritableMap events = Arguments.createMap();
+        context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(
+                "onClear",
+                events
+        );
     }
 
-    public void saveDrawing() { }
-
-    public String drawingToString(Bitmap bitmap) {
+    public Bitmap.CompressFormat getImageFormat(String imageType) {
         Bitmap.CompressFormat format;
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
         switch (imageType) {
             case "png":
@@ -157,7 +165,27 @@ public class RNSketchView extends View {
                 throw new Error("imageType " + imageType + " is not a valid image type for exporting the drawing.");
         }
 
-        bitmap.compress(format, 100, byteArrayOutputStream);
+        return format;
+    }
+
+    public String saveDrawing(String imageData, String imageType) throws IOException {
+        File directory = context.getFilesDir();
+        File filename = new File(directory, UUID.randomUUID().toString() + "." + imageType);
+        FileOutputStream fileOutputStream;
+
+        fileOutputStream = new FileOutputStream(filename);
+        byte[] decodedString = Base64.decode(imageData, Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        decodedByte.compress(getImageFormat(imageType), 100, fileOutputStream);
+
+        fileOutputStream.close();
+
+        return filename.getAbsolutePath();
+    }
+
+    public String drawingToString(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(getImageFormat(imageType), 100, byteArrayOutputStream);
         return Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
     }
 }
