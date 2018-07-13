@@ -67,6 +67,7 @@ Here are the `props` of the the component:
 | ---- | ---- | ------------- | ---- |
 | `fillColor` | `String` | `null` | The color of the sketch background. Default to null to keep it transparent! *Note: This is different from the `style.backgroundColor` property, as the former will be seen in your exported drawing image, whereas the latter is only used to style the view.* |
 | `imageType` | `String` | `png` | The type of image to export. Can be `png` or `jpg`. Default to `png` to get transparency out of the box. |
+| `imageData` | `String` | `null` | PNG/JPEG image intepretation encoded with base64 to render on the drawing canvas. |
 | `onChange` | `Function` | `() => {}` | Callback function triggered after every change on the drawing. The function takes one argument: the actual base64 representation of your drawing.|
 | `onClear` | `Function` | `() => {}` | Callback function triggered after a `clear` has been triggered. |
 | `strokeColor` | `String` | `'#000000'` | The stroke color you want to draw with. |
@@ -79,6 +80,12 @@ The component also has some instance methods:
 | ---- | ----------- | ------- |
 | `clear()` | `Promise` | Clear the drawing. This method is a Promise mostly to be consistent with `save()`, but you could simply type: `this.sketch.clear();` |
 | `save()` | `Promise` | Save the drawing to an image, using the defined props as settings (`imageType`, `fillColor`, etc...). The Promise resolves with an object containing the `path` property of that image. Ex: `this.sketch.save().then(image => console.log(image.path));` |
+
+Here are a few static helper functions for the component:
+
+| Name | Return type | Comment |
+| ---- | ----------- | ------- |
+| `getImageDataFromFilePath` | `Promise` | Reads a JPEG or PNG file into base64 image data that can be rendered using the `imageData` prop. |
 
 ## Examples
 

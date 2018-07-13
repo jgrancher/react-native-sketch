@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NativeModules, requireNativeComponent, View, ViewPropTypes } from 'react-native';
+import RNFS from 'react-native-fs';
 
 const SketchManager = NativeModules.RNSketchManager || {};
 
@@ -29,6 +30,25 @@ export default class Sketch extends React.Component {
     imageData: null,
     style: null
   };
+
+  static getImageDataFromFilePath(filePath) {
+    const formats = {
+      "jpg": "image/jpg",
+      "jpeg": "image/jpg",
+      "png": "image/png"
+    }
+    const fileExtension = filePath.split('.').pop();
+    const format = formats[fileExtension];
+
+    if (!format) {
+      throw new Error(`Unable to parse file extension .${fileExtension}`)
+    }
+
+    return RNFS.readFile(filePath.path, 'base64')
+      .then((base64) => {
+          return `data:${format};base64,${base64}`;
+      })
+  }
 
   constructor(props) {
     super(props);
