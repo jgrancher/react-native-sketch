@@ -29,5 +29,6 @@
 @property (nonatomic, strong) NSString *imageType;
 @property (nonatomic, strong) UIColor *strokeColor;
 @property (nonatomic, assign) NSInteger strokeThickness;
+@property (nonatomic, strong) NSURL *imageData;
 
 @end

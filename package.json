@@ -4,7 +4,8 @@
   "description": "A react-native component for touch-based drawing",
   "main": "index.ios.js",
   "dependencies": {
-    "prop-types": "^15.5.10"
+    "prop-types": "^15.5.10",
+    "react-native-fs": "^2.10.14"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",

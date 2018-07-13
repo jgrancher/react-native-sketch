@@ -36,6 +36,7 @@ RCT_EXPORT_VIEW_PROPERTY(fillColor, UIColor);
 RCT_EXPORT_VIEW_PROPERTY(imageType, NSString);
 RCT_EXPORT_VIEW_PROPERTY(strokeColor, UIColor);
 RCT_EXPORT_VIEW_PROPERTY(strokeThickness, NSInteger);
+RCT_EXPORT_VIEW_PROPERTY(imageData, NSURL);
 
 #pragma mark - Lifecycle
 

@@ -123,7 +123,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 
 - (void)drawBitmap
 {
-  UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0);
+  UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, UIViewContentModeScaleAspectFit);
 
   // Paint background if fillColor property provided
   if (!_image && _fillColor) {
@@ -190,6 +190,14 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 - (void)setStrokeColor:(UIColor *)strokeColor
 {
   _strokeColor = strokeColor;
+}
+
+- (void)setImageData:(NSURL *)imageURLData
+{
+  NSData *imageData = [NSData dataWithContentsOfURL:imageURLData];
+  _image = [UIImage imageWithData:imageData];
+  [self drawBitmap];
+  [self setNeedsDisplay];
 }
 
 - (void)setStrokeThickness:(NSInteger)strokeThickness
