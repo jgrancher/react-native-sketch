@@ -21,6 +21,7 @@
 @implementation RNSketch
 {
   // Internal
+  UIBezierPath *_dot;
   UIBezierPath *_path;
   UIImage *_image;
   CGPoint _points[5];
@@ -38,6 +39,7 @@
     // For borderRadius property to work (CALayer's cornerRadius).
     self.layer.masksToBounds = YES;
 
+    _dot = [UIBezierPath bezierPath];
     _path = [UIBezierPath bezierPath];
   }
 
@@ -46,12 +48,6 @@
 
 RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 
-- (void)layoutSubviews
-{
-  [super layoutSubviews];
-  [self drawBitmap];
-}
-
 #pragma mark - UIResponder methods
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -59,6 +55,8 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
   _counter = 0;
   UITouch *touch = [touches anyObject];
   _points[0] = [touch locationInView:self];
+
+  [self drawDot];
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -75,6 +73,7 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
   [self drawBitmap];
   [self setNeedsDisplay];
 
+  [_dot removeAllPoints];
   [_path removeAllPoints];
   _counter = 0;
 
@@ -92,11 +91,19 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 - (void)drawRect:(CGRect)rect
 {
   [_image drawInRect:rect];
+  [_strokeColor setFill];
+  [_dot fill];
   [_strokeColor setStroke];
   [_path stroke];
 }
 
 #pragma mark - Drawing methods
+
+- (void)drawDot
+{
+  [_dot addArcWithCenter:_points[0] radius:(_path.lineWidth / 2) startAngle:0 endAngle:2 * M_PI clockwise:YES];
+  [self setNeedsDisplay];
+}
 
 - (void)drawCurve
 {
@@ -126,6 +133,8 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 
   // Draw with context
   [_image drawAtPoint:CGPointZero];
+  [_strokeColor setFill];
+  [_dot fill];
   [_strokeColor setStroke];
   [_path stroke];
   _image = UIGraphicsGetImageFromCurrentImageContext();

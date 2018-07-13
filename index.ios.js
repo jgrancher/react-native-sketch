@@ -1,15 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  NativeModules,
-  requireNativeComponent,
-  View,
-  ViewPropTypes
-} from 'react-native';
+import { NativeModules, requireNativeComponent, View, ViewPropTypes } from 'react-native';
 
 const SketchManager = NativeModules.RNSketchManager || {};
 
-//Fallback when RN version is < 0.44
+// Fallback when RN version is < 0.44
 const viewPropTypes = ViewPropTypes || View.propTypes;
 
 export default class Sketch extends React.Component {
@@ -69,7 +64,11 @@ export default class Sketch extends React.Component {
 
   clear = () => SketchManager.clearDrawing();
 
-  save = () => SketchManager.saveDrawing(this.state.imageData, this.props.imageType);
+  save = () => {
+    if (!this.state.imageData) return Promise.reject('No image provided!');
+
+    return SketchManager.saveDrawing(this.state.imageData, this.props.imageType);
+  };
 
   render() {
     const { fillColor, strokeColor, strokeThickness, ...props } = this.props;
