@@ -1,8 +1,10 @@
-# 🎨 React Native Sketch
+# 🎨 React Native Sketch [Unmaintained]
 
 [![npm](https://img.shields.io/npm/v/react-native-sketch.svg)](https://www.npmjs.com/package/react-native-sketch)
 [![Downloads](https://img.shields.io/npm/dm/react-native-sketch.svg)](https://www.npmjs.com/package/react-native-sketch)
 [![MIT License](https://img.shields.io/npm/l/react-native-sketch.svg)](http://opensource.org/licenses/MIT)
+
+**⚠️ NOTE [12/08/2021]: Archiving this repository because I haven't had the resources to maintain it for a while. Apologies.**
 
 A React Native component for touch-based drawing.
 
