@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NativeModules, requireNativeComponent, View, ViewPropTypes } from 'react-native';
+import { DeviceEventEmitter, NativeModules, requireNativeComponent, View, ViewPropTypes } from 'react-native';
 
 const SketchManager = NativeModules.RNSketchManager || {};
 
@@ -42,9 +42,8 @@ export default class Sketch extends React.Component {
     imageData: null,
   };
 
-  onChange = (event) => {
+  onChange = event => {
     const { imageData } = event.nativeEvent;
-
     this.setState({ imageData });
     this.props.onChange(imageData);
   };
@@ -54,13 +53,22 @@ export default class Sketch extends React.Component {
     this.props.onClear();
   };
 
-  clear = () => SketchManager.clearDrawing();
+  clear = () => {
+    SketchManager.clearDrawing();
+  }
 
   save = () => {
     if (!this.state.imageData) return Promise.reject('No image provided!');
-
     return SketchManager.saveDrawing(this.state.imageData, this.props.imageType);
   };
+
+  componentWillMount() {
+    DeviceEventEmitter.addListener("onClear", this.onClear);
+  }
+
+  componentWillUnmount() {
+    DeviceEventEmitter.removeListener("onClear", this.onClear);
+  }
 
   render() {
     const { fillColor, strokeColor, strokeThickness, ...props } = this.props;
@@ -79,4 +87,16 @@ export default class Sketch extends React.Component {
   }
 }
 
-const RNSketch = requireNativeComponent('RNSketch', Sketch);
+const RNSketch = requireNativeComponent('RNSketch', Sketch, {
+  nativeOnly: {
+    onChange: true,
+    onLayout: true,
+    testID: true,
+    nativeID: true,
+    importantForAccessibility: true,
+    accessibilityLiveRegion: true,
+    accessibilityComponentType: true,
+    accessibilityLabel: true,
+    renderToHardwareTextureAndroid: true,
+  },
+});
